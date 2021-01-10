@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="TextColorButton" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Option virtualFolders="EdColorPicker/;res/;build/;omni/;" />
+		<Build>
+			<Target title="D">
+				<Option output="bin/D/TextColorButton" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/D/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+				<ExtraCommands>
+					<Add before="cd $(PROJECT_DIR)" />
+					<Add before="chmod u=rwx ./build/build.bash" />
+					<Add before="./build/build.bash" />
+				</ExtraCommands>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="../../../../sys/usr/local/Thunderbird/omni/chrome/messenger/content/messenger/messengercompose/EdColorPicker.js">
+			<Option virtualFolder="omni/" />
+		</Unit>
+		<Unit filename="../../../../sys/usr/local/Thunderbird/omni/chrome/messenger/content/messenger/messengercompose/EdColorPicker.xhtml">
+			<Option virtualFolder="omni/" />
+		</Unit>
+		<Unit filename="build/build.bash">
+			<Option virtualFolder="build/" />
+		</Unit>
+		<Unit filename="res/css-colors--generate-js.bash">
+			<Option virtualFolder="res/" />
+		</Unit>
+		<Unit filename="res/css-colors-147--raw.txt">
+			<Option virtualFolder="res/" />
+		</Unit>
+		<Unit filename="res/css-colors-147-blue--raw.txt">
+			<Option virtualFolder="res/" />
+		</Unit>
+		<Unit filename="res/css-colors-147-brown--raw.txt">
+			<Option virtualFolder="res/" />
+		</Unit>
+		<Unit filename="res/css-colors-147-cyan--raw.txt">
+			<Option virtualFolder="res/" />
+		</Unit>
+		<Unit filename="res/css-colors-147-green--raw.txt">
+			<Option virtualFolder="res/" />
+		</Unit>
+		<Unit filename="res/css-colors-147-grey--raw.txt">
+			<Option virtualFolder="res/" />
+		</Unit>
+		<Unit filename="res/css-colors-147-orange--raw.txt">
+			<Option virtualFolder="res/" />
+		</Unit>
+		<Unit filename="res/css-colors-147-pink--raw.txt">
+			<Option virtualFolder="res/" />
+		</Unit>
+		<Unit filename="res/css-colors-147-purple--raw.txt">
+			<Option virtualFolder="res/" />
+		</Unit>
+		<Unit filename="res/css-colors-147-red--raw.txt">
+			<Option virtualFolder="res/" />
+		</Unit>
+		<Unit filename="res/css-colors-147-white--raw.txt">
+			<Option virtualFolder="res/" />
+		</Unit>
+		<Unit filename="res/css-colors-147-yellow--raw.txt">
+			<Option virtualFolder="res/" />
+		</Unit>
+		<Unit filename="src/EdColorPicker-template.js">
+			<Option virtualFolder="EdColorPicker/" />
+		</Unit>
+		<Unit filename="src/EdColorPicker-template.xhtml">
+			<Option virtualFolder="EdColorPicker/" />
+		</Unit>
+		<Extensions>
+			<envvars />
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

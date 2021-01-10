@@ -1,0 +1,17 @@
+Maroon 	80 00 00 	128   0   0
+Brown 	A5 2A 2A 	165  42  42
+SaddleBrown 	8B 45 13 	139  69  19
+Sienna 	A0 52 2D 	160  82  45
+Chocolate 	D2 69 1E 	210 105  30
+DarkGoldenrod 	B8 86 0B 	184 134  11
+Peru 	CD 85 3F 	205 133  63
+RosyBrown 	BC 8F 8F 	188 143 143
+Goldenrod 	DA A5 20 	218 165  32
+SandyBrown 	F4 A4 60 	244 164  96
+Tan 	D2 B4 8C 	210 180 140
+Burlywood 	DE B8 87 	222 184 135
+Wheat 	F5 DE B3 	245 222 179
+NavajoWhite 	FF DE AD 	255 222 173
+Bisque 	FF E4 C4 	255 228 196
+BlanchedAlmond 	FF EB CD 	255 235 205
+Cornsilk 	FF F8 DC 	255 248 220

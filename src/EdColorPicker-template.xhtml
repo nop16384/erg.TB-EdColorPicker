@@ -1,0 +1,190 @@
+<?xml version="1.0"?>
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://editor/skin/EditorDialog.css" type="text/css"?>
+<?xml-stylesheet href="chrome://messenger/skin/themeableDialog.css" type="text/css"?>
+
+<!DOCTYPE window SYSTEM "chrome://messenger/locale/messengercompose/EdColorPicker.dtd">
+
+<window title="&windowTitle.label;"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        lightweightthemes="true"
+        onload="Startup()">
+<dialog>
+
+  <script src="chrome://messenger/content/messengercompose/editorUtilities.js"/>
+  <script src="chrome://messenger/content/messengercompose/EdDialogCommon.js"/>
+  <script src="chrome://messenger/content/messengercompose/EdColorPicker.js"/>
+  <script src="chrome://messenger/content/dialogShadowDom.js"/>
+
+  <spacer id="location" offsetY="50" persist="offsetX offsetY"/>
+
+  <hbox id="TableOrCellGroup" align="center" collapsed="true">
+    <label control="CellOrTableGroup" value="&background.label;" accesskey="&background.accessKey;"/>
+    <radiogroup id="CellOrTableGroup" orient="horizontal">
+      <radio id="TableRadio" label="&table.label;" accesskey="&table.accessKey;"/>
+      <radio id="CellRadio"  label="&cell.label;"  accesskey="&cell.accessKey;"/>
+  </radiogroup>
+  </hbox>
+
+  <!-- ######################################################################################### -->
+  <grid flex="1">
+    <columns>
+      <column flex="2"/>
+      <column flex="1"/>
+    </columns>
+    <rows>
+      <row>
+
+        <hbox>
+
+          <html:input type="color" id="ColorPicker"
+            ondblclick="if (onAccept()) { window.close(); }"
+            onkeypress="SelectColorByKeypress(event);"
+            onchange="SelectColor();"/>
+        </hbox>
+
+        <hbox>
+          <menulist
+            id="erg_LPC_menulist"
+            label="Last"
+            crop="none"
+            sizetopopup="none"
+            pickedColors=""
+            oncommand="erg_LPC_lpc_cbk_changed(event)"
+            persist="pickedColors">
+
+            <menupopup
+              id="erg_LPC_menupopup"
+              style="max-height:100px; min-width:10px; width:130px; overflow:scroll;">
+
+              <box style="padding:2px;">
+                <menuitem label="#556677" value="#556677" style="background-color:#556677; width:112px"/>
+              </box>
+
+              <grid id="erg_LPC_grid">
+                <columns>
+                <column style="padding:2px;"/>
+                <column style="padding:2px;"/>
+                <column style="padding:2px;"/>
+                <column style="padding:2px;"/>
+                </columns>
+                <rows id="erg_LPC_grid_rows">
+                  <row style="padding:2px;">
+                    <menuitem label="xxx" value="#da504d" style="background-color:#da504d; min-width:10px; width:25px;"/>
+                    <menuitem label="xxx" value="#ffa500" style="background-color:#ffa500; min-width:10px; width:25px;"/>
+                    <menuitem label="xxx" value="#ffc0cb" style="background-color:#ffc0cb; min-width:10px; width:25px;"/>
+                    <menuitem label="xxx" value="#90ee90" style="background-color:#90ee90; min-width:10px; width:25px;"/>
+                  </row>
+                  <row style="padding:2px;">
+                    <menuitem label="xxx" value="#da504d" style="background-color:#da504d; min-width:10px; width:25px;"/>
+                    <menuitem label="xxx" value="#ffa500" style="background-color:#ffa500; min-width:10px; width:25px;"/>
+                    <menuitem label="xxx" value="#ffc0cb" style="background-color:#ffc0cb; min-width:10px; width:25px;"/>
+                    <menuitem label="xxx" value="#90ee90" style="background-color:#90ee90; min-width:10px; width:25px;"/>
+                  </row>
+                  <row style="padding:2px;">
+                    <menuitem label="xxx" value="#da504d" style="background-color:#da504d; min-width:10px; width:25px;"/>
+                    <menuitem label="xxx" value="#ffa500" style="background-color:#ffa500; min-width:10px; width:25px;"/>
+                    <menuitem label="xxx" value="#ffc0cb" style="background-color:#ffc0cb; min-width:10px; width:25px;"/>
+                    <menuitem label="xxx" value="#90ee90" style="background-color:#90ee90; min-width:10px; width:25px;"/>
+                  </row>
+                  <row style="padding:2px;">
+                    <menuitem label="xxx" value="#da504d" style="background-color:#da504d; min-width:10px; width:25px;"/>
+                    <menuitem label="xxx" value="#ffa500" style="background-color:#ffa500; min-width:10px; width:25px;"/>
+                    <menuitem label="xxx" value="#ffc0cb" style="background-color:#ffc0cb; min-width:10px; width:25px;"/>
+                    <menuitem label="xxx" value="#90ee90" style="background-color:#90ee90; min-width:10px; width:25px;"/>
+                  </row>
+                </rows>
+              </grid>
+
+            </menupopup>
+
+          </menulist>
+
+          <spacer flex="1"/>
+
+          <vbox
+            id="erg_LPC_box"
+            style="padding-top:2px; min-width:10px;  width:30px; height:15px; border:none;"
+            LastTextColor=""
+            LastBackgroundColor=""
+            persist="LastTextColor LastBackgroundColor">
+
+            <button id="erg_LPC_bt_lpc"
+              style="min-height:10px; min-width:10px; width:20px; height:20px; background-color:#aabb55;"
+              bgColHex="#aabb55"
+              oncommand="erg_LPC_lpc_cbk_select()">
+            </button>
+          </vbox>
+
+        </hbox>
+
+      </row>
+
+      <row>
+
+        <hbox>
+          <button id="DefaultColorButton" label="&default.label;" accesskey="&default.accessKey;" oncommand="RemoveColor()"/>
+        </hbox>
+
+        <hbox>
+
+          <menulist
+            id="erg_LPC_ml_named_colors"
+            label="CSS colors"
+            crop="none"
+            sizetopopup="none"
+            oncommand="erg_LPC_css_cbk_changed(event)">
+
+            <menupopup
+              id="erg_LPC_nc_menupopup"
+              style="font-size:12px; max-height:200px; min-width:10px; width:130px; overflow:scroll;">
+__ERG_MARK__CSS_COLORS_XHTML_01__
+            </menupopup>
+          </menulist>
+
+          <spacer flex="1"/>
+
+          <vbox
+            style="padding-top:2px;  min-width:10px;  width:30px; height:15px; border:none;">
+            <button id="erg_LPC_bt_css"
+              style="min-height:10px; min-width:10px; width:20px; height:20px; background-color:#aabb55;"
+              bgColHex="#aabb55"
+              oncommand="erg_LPC_css_cbk_select()">
+            </button>
+          </vbox>
+
+        </hbox>
+
+      </row>
+    </rows>
+  </grid>
+  <!-- ######################################################################################### -->
+  <separator class="groove"/>
+
+  <hbox align="center" flex="1">
+
+    <vbox>
+      <label class="tip-caption" value="&chooseColor2.label;" accesskey="&chooseColor2.accessKey;" control="ColorInput"/>
+      <label class="tip-caption" value="&setColorExample.label;"/>
+    </vbox>
+
+    <html:input id="ColorInput" type="text" style="width: 8em"
+      oninput="erg_LPC_inp_cbk_select();"/>
+
+    <label id="ColorPickerSwatch"/>
+
+    <button id="erg_LPC_bt_inp"
+      style="min-height:5px; min-width:10px; width:30px; height:20px; background-color:#aabb55;"
+      bgColHex="#aabb55"
+      oncommand="">
+    </button>
+
+  </hbox>
+  <separator class="groove"/>
+</dialog>
+</window>

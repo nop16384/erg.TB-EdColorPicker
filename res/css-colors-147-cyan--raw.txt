@@ -1,0 +1,12 @@
+Teal 	00 80 80 	  0 128 128
+DarkCyan 	00 8B 8B 	  0 139 139
+LightSeaGreen 	20 B2 AA 	 32 178 170
+CadetBlue 	5F 9E A0 	 95 158 160
+DarkTurquoise 	00 CE D1 	  0 206 209
+MediumTurquoise 	48 D1 CC 	 72 209 204
+Turquoise 	40 E0 D0 	 64 224 208
+Aqua 	00 FF FF 	  0 255 255
+Cyan 	00 FF FF 	  0 255 255
+Aquamarine 	7F FF D4 	127 255 212
+PaleTurquoise 	AF EE EE 	175 238 238
+LightCyan 	E0 FF FF 	224 255 255

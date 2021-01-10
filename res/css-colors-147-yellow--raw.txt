@@ -1,0 +1,11 @@
+DarkKhaki 	BD B7 6B 	189 183 107
+Gold 	FF D7 00 	255 215   0
+Khaki 	F0 E6 8C 	240 230 140
+PeachPuff 	FF DA B9 	255 218 185
+Yellow 	FF FF 00 	255 255   0
+PaleGoldenrod 	EE E8 AA 	238 232 170
+Moccasin 	FF E4 B5 	255 228 181
+PapayaWhip 	FF EF D5 	255 239 213
+LightGoldenrodYellow 	FA FA D2 	250 250 210
+LemonChiffon 	FF FA CD 	255 250 205
+LightYellow 	FF FF E0 	255 255 224

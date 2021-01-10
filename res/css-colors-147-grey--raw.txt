@@ -1,0 +1,17 @@
+Black 	00 00 00 	  0   0   0
+DarkSlateGray 	2F 4F 4F 	 47  79  79
+DarkSlateGrey 	2F 4F 4F 	 47  79  79
+DimGray 	69 69 69 	105 105 105
+DimGrey 	69 69 69 	105 105 105
+SlateGray 	70 80 90 	112 128 144
+SlateGrey 	70 80 90 	112 128 144
+Gray 	80 80 80 	128 128 128
+Grey 	80 80 80 	128 128 128
+LightSlateGray 	77 88 99 	119 136 153
+LightSlateGrey 	77 88 99 	119 136 153
+DarkGray 	A9 A9 A9 	169 169 169
+DarkGrey 	A9 A9 A9 	169 169 169
+Silver 	C0 C0 C0 	192 192 192
+LightGray 	D3 D3 D3 	211 211 211
+LightGrey 	D3 D3 D3 	211 211 211
+Gainsboro 	DC DC DC 	220 220 220
