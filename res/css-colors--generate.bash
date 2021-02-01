@@ -1,5 +1,9 @@
 #!/bin/bash
+# **************************************************************************************************
+source "${ERG__PATH_BINARIES}/build-tools/erg.build-tools_main.bash"
 
+erg_bt__vars_import
+# **************************************************************************************************
 Types="pink red orange yellow brown green cyan blue purple white grey"
 declare -a RawArray
 
@@ -12,7 +16,7 @@ Spc="              "
 
 for Type in ${Types} ; do
 
-  echo "Processing type [${Type}]"
+  erg_bt__msg "Processing type [${Type}]"
 
   xhtml=""
   xhtml="${Spc}<menu label=\"${Type}\">\n"

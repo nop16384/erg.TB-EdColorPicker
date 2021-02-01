@@ -7,20 +7,30 @@
 
 // Cancel() is in EdDialogCommon.js
 
-//  ################################################################################################
-function ErgEcpColor(_i_name, _i_hex, _i_type)
-{
-  this.name   = _i_name;
-  this.hex    = _i_hex;
+/*
+  --------------------------------------------------------------------------------------------------
+  ERG TODO
 
-  if ( _i_type == undefined )
-  {
-    this.type = ""
-  }
-  else
-  {
-    this.type   = _i_type;
-  }
+  - pb colors #xxxxxx and names
+  - DefaultToOk stuff
+  - Dialog placement
+  - See if we should regroup all VDOM inside one widget properties instead of having them scattered
+  --------------------------------------------------------------------------------------------------
+*/
+
+//  ################################################################################################
+function ErgEcpCssColor(_i_hex, _i_css_name, _i_color_family)
+{
+  this.hex            = _i_hex;
+  this.css_name       = _i_css_name;
+  this.color_family   = _i_color_family;
+}
+
+function ErgEcpColor(_i_hex)
+{
+  this.hex            = _i_hex;
+  //this.css_name       = _i_css_name;
+  //this.color_family   = _i_color_family;
 }
 
 function  erg_init_colors_array()
@@ -39,25 +49,26 @@ var TableOrCell = false;
 var NoDefault = false;
 var gColorObj;
 
-var     erg_LPC_box;
-var     erg_LPC_bt_lpc;
-var     erg_LPC_menulist;
-var     erg_LPC_grid;
-var     erg_LPC_grid_rows;
-var     erg_LPC_menupopup;
+var gErgEcp;
 
-var     erg_LPC_input;
+var gErgWidgets;
 
-var     gErgEcpColors = new Array();
-
-const   eErgColorValidity = {"Y":1, "P":2, "N":3 };
-Object.freeze(eErgColorValidity)
-
-// dialog initialization code
+const   eErgEcpColorValidity =
+{
+  "Y"     :10   ,
+  "YHEX"  :11   ,
+  "YCSS"  :12   ,
+  "YDEF"  :13   ,
+  "M"     :20   ,
+  "MHEX"  :21   ,
+  "MCSS"  :22   ,
+  "N"     :30
+};
+Object.freeze(eErgEcpColorValidity)
 
 document.addEventListener("dialogaccept", onAccept);
 document.addEventListener("dialogcancel", onCancelColor);
-
+//  ################################################################################################
 function Startup() {
   if (!window.arguments[1]) {
     dump("EdColorPicker: Missing color object param\n");
@@ -69,46 +80,48 @@ function Startup() {
   gColorObj.Cancel = false;
 
   gDialog.ColorPicker = document.getElementById("ColorPicker");
-  gDialog.ColorInput = document.getElementById("ColorInput");
-    // ERG+
-    //      gDialog.LastPickedButton = document.getElementById("LastPickedButton");
-    //      gDialog.LastPickedColor = document.getElementById("LastPickedColor");
-    // ERG-
+  gDialog.ColorInput = document.getElementById("erg_ecp_EDOM_inp__txt");
   gDialog.CellOrTableGroup = document.getElementById("CellOrTableGroup");
   gDialog.TableRadio = document.getElementById("TableRadio");
   gDialog.CellRadio = document.getElementById("CellRadio");
   gDialog.ColorSwatch = document.getElementById("ColorPickerSwatch");
   gDialog.Ok = document.querySelector("dialog").getButton("accept");
 
-    erg_LPC_box             =   document.getElementById("erg_LPC_box");
-    erg_LPC_bt_lpc          =   document.getElementById("erg_LPC_bt_lpc");
-    erg_LPC_menulist        =   document.getElementById("erg_LPC_menulist");
-    erg_LPC_grid            =   document.getElementById("erg_LPC_grid");
-    erg_LPC_grid_rows       =   document.getElementById("erg_LPC_grid_rows");
-    erg_LPC_menupopup       =   document.getElementById("erg_LPC_menupopup");
-    erg_LPC_ml_named_colors =   document.getElementById("erg_LPC_ml_named_colors");
+  gDialog.Location        =   document.getElementById("location");
+  //  ..............................................................................................
+  gErgEcp                     =   new Object();
 
-    erg_LPC_bt_inp          =   document.getElementById("erg_LPC_bt_inp");
+    gErgEcp.Lpc               =   new Object();
 
-    erg_LPC_menu_red        =   document.getElementById("erg_LPC_menu_red");
-    erg_LPC_menu_pink       =   document.getElementById("erg_LPC_menu_pink");
+    gErgEcp.Widgets           =   new Object();
+      gErgEcp.Widgets.Lpc     =   new Object();
+      gErgEcp.Widgets.Css     =   new Object();
+      gErgEcp.Widgets.Input   =   new Object();
 
-    erg_init_colors_array();
-    //mi = document.createElement("menuitem");
-    //mi.setAttribute("label", "abcdef");
-    //erg_LPC_menu_red.appendChild(mi);
+    gErgEcp.Colors            =   new Object();
+      gErgEcp.Colors.Css      =   new Array();
 
-    erg_LPC_input       =   document.getElementById("ColorInput");
+  gErgEcp.Widgets.Lpc.vbox          =   document.getElementById("erg_ecp_EDOM_lpc__vbox");
+  gErgEcp.Widgets.Lpc.btn           =   document.getElementById("erg_ecp_EDOM_lpc__btn");
+  gErgEcp.Widgets.Lpc.mnl           =   document.getElementById("erg_ecp_EDOM_lpc__mnl");
+  gErgEcp.Widgets.Lpc.grid          =   document.getElementById("erg_ecp_EDOM_lpc__grid");
+  gErgEcp.Widgets.Lpc.grid_rows     =   document.getElementById("erg_ecp_EDOM_lpc__grid_rows");
+  gErgEcp.Widgets.Css.mnl           =   document.getElementById("erg_ecp_EDOM_css__mnl");
+  gErgEcp.Widgets.Css.btn           =   document.getElementById("erg_ecp_EDOM_css__btn");
+  gErgEcp.Widgets.Input.btn         =   document.getElementById("erg_ecp_EDOM_inp__btn");
+  gErgEcp.Widgets.Input.txt         =   document.getElementById("erg_ecp_EDOM_inp__txt");
 
-    //erg_LPC_menulist.setAttribute("pickedColors", "");
+  gErgEcp.Lpc.grid_rows_card        =   gErgEcp.Widgets.Lpc.grid_rows.childElementCount;
+  gErgEcp.Lpc.card                  =   gErgEcp.Lpc.grid_rows_card * 4;
 
-    console.log("Startup():s[" + erg_LPC_menulist.getAttribute("pickedColors") + "]");
+  erg_init_colors_array();
+    console.log("Startup():s[" +
+      gErgEcp.Widgets.Lpc.mnl.getAttribute("erg_ecp_VDOM_lpc__picked_colors") + "]");
+  erg_ecp_lpc__update_xul_grid();
 
-    erg_LPC_lpc_update_xul_grid();
-
-    erg_LPC_menulist.setAttribute("label", "Last-picked colors");
-    erg_LPC_ml_named_colors.setAttribute("label", "CSS colors");
-
+  gErgEcp.Widgets.Lpc.mnl.setAttribute("label", "Last-picked colors");
+  gErgEcp.Widgets.Css.mnl.setAttribute("label", "CSS colors");
+  //  ..............................................................................................
   // The type of color we are setting:
   //  text: Text, Link, ActiveLink, VisitedLink,
   //  or background: Page, Table, or Cell
@@ -127,7 +140,7 @@ function Startup() {
     }
   }
 
-  gDialog.ColorInput.value = "";
+  gDialog.ColorInput = "";
   var tmpColor;
   var haveTableRadio = false;
 
@@ -179,28 +192,18 @@ function Startup() {
   }
 
   // Set initial color in input field and in the colorpicker
-  erg_LPC_set_current_color(gColor);
+  erg_ecp_cur__set(gColor);
   gDialog.ColorPicker.value = gColor;
 
   // Use last-picked colors passed in, or those persistent on dialog
   if (TextType) {
     if (!("LastTextColor" in gColorObj) || !gColorObj.LastTextColor) {
-        // ERG+
-        //    gColorObj.LastTextColor = gDialog.LastPickedColor.getAttribute(
-        //    "LastTextColor"
-        //    );
-        gColorObj.LastTextColor = erg_LPC_box.getAttribute("LastTextColor");
-        // ERG-
+        gColorObj.LastTextColor = gErgEcp.Widgets.Lpc.vbox.getAttribute("LastTextColor");
     }
     LastPickedColor = gColorObj.LastTextColor;
   } else if (HighlightType) {
     if (!("LastHighlightColor" in gColorObj) || !gColorObj.LastHighlightColor) {
-        // ERG+
-        //      gColorObj.LastHighlightColor = gDialog.LastPickedColor.getAttribute(
-        //      "LastHighlightColor"
-        //      );
-        gColorObj.LastTextColor = erg_LPC_box.getAttribute("LastHighlightColor");
-        // ERG-
+        gColorObj.LastTextColor = gErgEcp.Widgets.Lpc.vbox.getAttribute("LastHighlightColor");
     }
     LastPickedColor = gColorObj.LastHighlightColor;
   } else {
@@ -208,12 +211,7 @@ function Startup() {
       !("LastBackgroundColor" in gColorObj) ||
       !gColorObj.LastBackgroundColor
        ) {
-            // ERG+
-            //      gColorObj.LastBackgroundColor = gDialog.LastPickedColor.getAttribute(
-            //      "LastBackgroundColor"
-            //      );
-            gColorObj.LastBackgroundColor = erg_LPC_box.getAttribute("LastBackgroundColor");
-            // ERG-
+            gColorObj.LastBackgroundColor = gErgEcp.Widgets.Lpc.vbox.getAttribute("LastBackgroundColor");
     }
     LastPickedColor = gColorObj.LastBackgroundColor;
   }
@@ -225,7 +223,8 @@ function Startup() {
   if ( ! LastPickedColor )
   {
     console.log("Startup():!LastPickedColor");
-    alert("Startup():!LastPickedColor");
+    gErgEcp.Widgets.Lpc.btn.style.setProperty("background-color", "inherit");
+    gErgEcp.Widgets.Lpc.btn.setAttribute("erg_ecp_VDOM_lpc__btn_bg_col_hex", "");
     // Hide the button, as there is no last color available.
     // ERG+
     //      gDialog.LastPickedButton.hidden = true;
@@ -237,11 +236,11 @@ function Startup() {
     //      "style",
     //      "background-color: " + LastPickedColor
     //      );
-    erg_LPC_bt_lpc.style.setProperty("background-color", LastPickedColor);
-    erg_LPC_bt_lpc.setAttribute("bgColHex", LastPickedColor);
+    gErgEcp.Widgets.Lpc.btn.style.setProperty("background-color", LastPickedColor);
+    gErgEcp.Widgets.Lpc.btn.setAttribute("erg_ecp_VDOM_lpc__btn_bg_col_hex", LastPickedColor);
 
-    erg_LPC_lpc_update_colors_list(LastPickedColor);
-    erg_LPC_lpc_update_xul_grid();
+    erg_ecp_lpc__colors_list__prepend_color(LastPickedColor);
+    erg_ecp_lpc__update_xul_grid();
 
     // ERG-
 
@@ -249,7 +248,7 @@ function Startup() {
     //gDialog.Ok.removeAttribute("default");
     // ERG+
     //      gDialog.LastPickedButton.setAttribute("default", "true");
-    //erg_LPC_bt_lpc.setAttribute("default", "true");
+    //gErgEcp.Widgets.Lpc.btn.setAttribute("default", "true");
     // ERG-
   }
 
@@ -265,78 +264,46 @@ function Startup() {
     gDialog.ColorPicker.focus();
   }
 
-  SetWindowLocation();
+  //SetWindowLocation();
+  erg_ecp_util__set_window_location();
 }
 //  ################################################################################################
-function SelectColor() {
-  var color = gDialog.ColorPicker.value;
-  if (color) {
-    erg_LPC_set_current_color(color);
-  }
-}
-
-function RemoveColor() {
-  erg_LPC_set_current_color("");
-  gDialog.ColorInput.focus();
-  //SetDefaultToOk();
-}
-
-function SelectColorByKeypress(aEvent) {
-  if (aEvent.charCode == aEvent.DOM_VK_SPACE) {
-    SelectColor();
-    //SetDefaultToOk();
-  }
-}
-
-function erg_LPC_set_current_color(color)
-{
-  // TODO: Validate color?
-
-  let c = gColor;
-
-  if ( !color )
-  {
-    color = "";
-  }
-
-  gColor = TrimString(color).toLowerCase();
-
-  if ( gColor == "mixed" )
-  {
-    gColor = "";
-  }
-
-  erg_LPC_set_color_swatch(gColor);
-
-  console.log("erg_LPC_set_current_color():gColor[" + c + "] -- > [" + gColor + "]");
-}
-
-function erg_LPC_set_color_swatch(_i_c)
-{
-  gDialog.ColorSwatch.setAttribute(
-    "style",
-    `background-color: ${TrimString(_i_c) || "inherit"}`
-    );
-
-  erg_LPC_bt_inp.style.setProperty("background-color", _i_c);
-
-  console.log("erg_LPC_set_color_swatch():[" + _i_c + "]");
-}
-
-/*
-function SetDefaultToOk() {
-
-    console.log("SetDefaultToOk():+");
-
-    // ERG+
-    //      gDialog.LastPickedButton.removeAttribute("default");
-    erg_LPC_bt_lpc.removeAttribute("default");
-    // ERG-
-  gDialog.Ok.setAttribute("default", "true");
-}
-*/
+//                      Utils
 //  ################################################################################################
-function erg_LPC_is_hexdigit(_i_c)
+function erg_ecp_util__set_window_location()
+{
+  gLocation = document.getElementById("location");
+  if (gLocation)
+  {
+
+    var px = window.opener.screenX;
+    var py = window.opener.screenY;
+
+    var ox = gLocation.getAttribute("offsetX");
+    var oy = gLocation.getAttribute("offsetY")
+
+    var aw = screen.availWidth;
+    var ah = screen.availHeight;
+
+    var iw = window.innerWidth;
+    var ih = window.innerHeight;
+
+    //console.log("SetWindowLocation():px[" + px + "] py[" + py + "]");
+    //console.log("                   :ox[" + ox + "] oy[" + oy + "]");
+    //console.log("                   :aw[" + aw + "] ah[" + ah + "]");
+    //console.log("                   :iw[" + iw + "] ih[" + ih + "]");
+
+    var cx = Number(px) + Number(ox);
+    var cy = Number(py) + Number(oy);
+
+    //console.log("                   :cx[" + cx + "] cy[" + cy + "]");
+    //console.log("                   :wx[" + screen.width + "]");
+
+    window.moveTo(cx,cy);
+  }
+}
+
+function erg_ecp_util__is_hexdigit(_i_c)
 {
   if  (
             ( ( _i_c >= 48 ) && ( _i_c <= 57 ) )  ||
@@ -349,80 +316,142 @@ function erg_LPC_is_hexdigit(_i_c)
   return false;
 }
 
-function erg_LPC_check_color_validity__hex(_i_s)
+function erg_ecp_util__check_color_string_validity__hex(_i_s)
 {
   var l, i, c;
   //  ..............................................................................................
   l = _i_s.length;
 
   if ( ( l == 0 ) || ( l > 7 ) )
-    return false;
+    return eErgEcpColorValidity.N;
 
   if ( _i_s[0] != '#' )
   {
-    return false;
+    return eErgEcpColorValidity.N;
   }
+
+  if ( l == 1 )
+    return eErgEcpColorValidity.MHEX;
 
   for ( i = 1 ; i != l ; i++ )
   {
     c = _i_s.charCodeAt(i);
 
-    console.log("--> " + c);
+    //console.log("--> " + c);
 
-    if  ( ! erg_LPC_is_hexdigit(c) )
+    if  ( ! erg_ecp_util__is_hexdigit(c) )
     {
-      console.log("    bad");
-      return false;
+      //console.log("    bad");
+      return eErgEcpColorValidity.N;
     }
-    else
-    {
-      console.log("    ok");
-    }
+    //else
+    //{
+    //  console.log("    ok");
+    //}
   }
-  return true;
+  return eErgEcpColorValidity.YHEX;
 }
 
-function erg_LPC_check_color_validity__named(_i_name)
+function erg_ecp_util__check_color_string_validity__css(_i_name)
 {
   var s, l, i;
   //  ..............................................................................................
   l = _i_name.length;
 
   if ( l == 0 )
-    return false;
+    return eErgEcpColorValidity.N;
 
   s = _i_name.toLowerCase();
 
-  for ( i = 0 ; i != gErgEcpColors.length ; i++ )
+  for ( i = 0 ; i != gErgEcp.Colors.Css.length ; i++ )
   {
-    if ( gErgEcpColors[i].name == s )
+    if ( gErgEcp.Colors.Css[i].css_name.startsWith(s) )
     {
-      return true;
+      if ( gErgEcp.Colors.Css[i].css_name == s )
+      {
+        return eErgEcpColorValidity.YCSS;
+      }
+      else
+      {
+        return eErgEcpColorValidity.MCSS;
+      }
     }
   }
-  return false;
+  return eErgEcpColorValidity.N;
 }
 
-function erg_LPC_check_color_validity(_i_name)
+function erg_ecp_util__check_color_string_validity(_i_s)
 {
-  //  ..............................................................................................
-  if ( _i_name.length == 0 )
-    return false;
+  if ( _i_s.length == 0 )
+    return eErgEcpColorValidity.N;
 
-  if ( _i_name[0] == '#' )
+  if ( _i_s[0] == '#' )
+    return erg_ecp_util__check_color_string_validity__hex(_i_s);
+
+  return erg_ecp_util__check_color_string_validity__css(_i_s);
+}
+
+function erg_ecp_util__get_color_hex_from_css(_i_css)
+{
+  var s, i;
+  //  ..............................................................................................
+  s = _i_css.toLowerCase();
+
+  for ( i = 0 ; i != gErgEcp.Colors.Css.length ; i++ )
   {
-    return erg_LPC_check_color_validity__hex(_i_name);
+    if ( gErgEcp.Colors.Css[i].css_name == _i_css )
+    {
+      return gErgEcp.Colors.Css[i].hex;
+    }
+  }
+  return "";
+}
+//  ################################################################################################
+//                    Currently selected color
+//  ################################################################################################
+function erg_ecp_cur__set_swatch(_i_c)
+{
+  gDialog.ColorSwatch.setAttribute(
+    "style",
+    `background-color: ${TrimString(_i_c) || "inherit"}`
+    );
+
+  gErgEcp.Widgets.Input.btn.style.setProperty("background-color", _i_c);
+
+  console.log("erg_ecp_cur__set_swatch():[" + _i_c + "]");
+}
+
+function erg_ecp_cur__set(color)
+{
+  // TODO: Validate color?
+
+  let c = gColor;
+
+  if ( ! color )
+  {
+    color = "";
   }
 
-  return erg_LPC_check_color_validity__named(_i_name);
+  gColor = TrimString(color).toLowerCase();
+
+  if ( gColor == "mixed" )
+  {
+    gColor = "";
+  }
+
+  erg_ecp_cur__set_swatch(gColor);
+
+  console.log("erg_ecp_cur__set():gColor[" + c + "] -- > [" + gColor + "]");
 }
+//  ################################################################################################
+//                    Dialog box buttons ( OK, Cancel, ... )
 //  ################################################################################################
 function onAccept(event)
 {
   if ( NoDefault && !gColor )
   {
     ShowInputErrorMessage(GetString("NoColorError"));
-    SetTextboxFocus(gDialog.ColorInput);
+    SetTextboxFocus(gDialog.erg_ecp_EDOM_inp__txt);
     event.preventDefault();
     return false;
   }
@@ -431,7 +460,7 @@ function onAccept(event)
   //  dont update the grid because we are leaving the dialog
   if ( gColor.length > 0 )
   {
-    erg_LPC_lpc_update_colors_list(gColor);
+    erg_ecp_lpc__colors_list__prepend_color(gColor);
   }
   //  ..............................................................................................
   //  Set return values and save in persistent color attributes
@@ -440,7 +469,7 @@ function onAccept(event)
     if (gColor.length > 0) {
         //  ERG+
         //      gDialog.LastPickedColor.setAttribute("LastTextColor", gColor);
-        erg_LPC_box.setAttribute("LastTextColor", gColor);
+        gErgEcp.Widgets.Lpc.vbox.setAttribute("LastTextColor", gColor);
         // ERG-
       gColorObj.LastTextColor = gColor;
     }
@@ -449,7 +478,7 @@ function onAccept(event)
     if (gColor.length > 0) {
         // ERG+
         //      gDialog.LastPickedColor.setAttribute("LastHighlightColor", gColor);
-        erg_LPC_box.setAttribute("LastHighlightColor", gColor);
+        gErgEcp.Widgets.Lpc.vbox.setAttribute("LastHighlightColor", gColor);
         // ERG-
       gColorObj.LastHighlightColor = gColor;
     }
@@ -458,7 +487,7 @@ function onAccept(event)
     if (gColor.length > 0) {
         // ERG+
         //      gDialog.LastPickedColor.setAttribute("LastBackgroundColor", gColor);
-        erg_LPC_box.setAttribute("LastBackgroundColor", gColor);
+        gErgEcp.Widgets.Lpc.vbox.setAttribute("LastBackgroundColor", gColor);
         // ERG-
       gColorObj.LastBackgroundColor = gColor;
     }
@@ -472,99 +501,171 @@ function onAccept(event)
   return true;
 }
 
-function onCancelColor() {
+function onCancelColor()
+{
   // Tells caller that user canceled
   gColorObj.Cancel = true;
   SaveWindowLocation();
 }
-//  ################################################################################################
-function erg_LPC_css_cbk_changed(_i_evt)
+
+function RemoveColor()
 {
-  erg_LPC_bt_css.style.setProperty("background-color", _i_evt.target.value);
-  erg_LPC_bt_css.setAttribute("bgColHex", _i_evt.target.value);
+  erg_ecp_cur__set("");
+  gDialog.erg_ecp_EDOM_inp__txt.focus();
+  //SetDefaultToOk();
+}
+//  ################################################################################################
+//                    Color Picker
+//  ################################################################################################
+function erg_ecp_cpk__cbk_changed()
+{
+  var color = gDialog.ColorPicker.value;
+  if (color)
+  {
+    erg_ecp_cur__set(color);                                                                        //  hex color
+  }
+}
+
+function erg_ecp_cpk__cbk_keypress(aEvent)
+{
+  if (aEvent.charCode == aEvent.DOM_VK_SPACE) {
+    erg_ecp_cpk__cbk_changed();
+    //SetDefaultToOk();
+  }
+}
+//  ################################################################################################
+//                    CSS colors
+//  ################################################################################################
+function erg_ecp_css__cbk_changed(_i_evt)
+{
+  gErgEcp.Widgets.Css.btn.style.setProperty("background-color", _i_evt.target.value);
+  gErgEcp.Widgets.Css.btn.setAttribute("erg_ecp_VDOM_css__btn_bg_col_hex", _i_evt.target.value);
 
   //  change the global selected color, avoiding the user having to click the button
-  erg_LPC_set_current_color(_i_evt.target.value);
+  erg_ecp_cur__set(_i_evt.target.value);                                                            //  hex color
 
   return true;
 }
 
-function erg_LPC_css_cbk_select()
+function erg_ecp_css__cbk_clicked()
 {
   //  if we read the "background-color" property value, we get rgb(a,b,c) crap
-  //  so we have to store it in a additionnal attribute "bgColHex"
-  let c = erg_LPC_bt_css.getAttribute("bgColHex");
+  //  so we have to store it in a additionnal attribute "erg_ecp_VDOM_css__btn_bg_col_hex"
+  let c = gErgEcp.Widgets.Css.btn.getAttribute("erg_ecp_VDOM_css__btn_bg_col_hex");
 
   // set global color
-  erg_LPC_set_current_color(c);
+  erg_ecp_cur__set(c);                                                                              //  hex color
 
   return true;
 }
 //  ################################################################################################
-function erg_LPC_inp_set_input_validity(b)
+//                    INPUT colors
+//  ################################################################################################
+function erg_ecp_inp__set_input_validity(_i_v)
 {
   //  ..............................................................................................
-  if ( b )
+  if  (
+        ( _i_v == eErgEcpColorValidity.Y    )   ||
+        ( _i_v == eErgEcpColorValidity.YHEX )   ||
+        ( _i_v == eErgEcpColorValidity.YCSS )
+      )
   {
-    erg_LPC_input.style.setProperty("background-color", "#ffffff");
+    gErgEcp.Widgets.Input.txt.style.setProperty("background-color", "#dafad9");
+    return;
   }
-  else
+
+  if  (
+        ( _i_v == eErgEcpColorValidity.YDEF )   ||
+        ( _i_v == eErgEcpColorValidity.M    )   ||
+        ( _i_v == eErgEcpColorValidity.MHEX )   ||
+        ( _i_v == eErgEcpColorValidity.MCSS )
+      )
   {
-    erg_LPC_input.style.setProperty("background-color", "#fac5c6");
+    gErgEcp.Widgets.Input.txt.style.setProperty("background-color", "#ffffff");
+    return;
+  }
+
+  if ( _i_v == eErgEcpColorValidity.N )
+  {
+    gErgEcp.Widgets.Input.txt.style.setProperty("background-color", "#fac5c6");
+    return;
   }
 }
 
-function erg_LPC_inp_check_input_validity()
+function erg_ecp_inp__check_input_validity()
 {
   var s, l, i, c;
   //  ..............................................................................................
-  s = erg_LPC_input.value;
+  s = gErgEcp.Widgets.Input.txt.value;
   l = s.length;
 
   //  empty color is OK, it is "default" color
   if ( l == 0 )
-    return true;
+    return eErgEcpColorValidity.YDEF;
 
-  return erg_LPC_check_color_validity(s);
+  return erg_ecp_util__check_color_string_validity(s);
 }
 
-function  erg_LPC_inp_cbk_select()
+function erg_ecp_inp__cbk_input()
 {
-  var b;
+  var v;
   //  ..............................................................................................
   //  verify the syntax of input text
-  //  color has to be #xxxxxx, or empty
-  b = erg_LPC_inp_check_input_validity();
+  //  color has to be #xxxxxx, css color name, or empty
+  //  expected value :
+  //  eErgEcpColorValidity. N
+  //                        YDEF
+  //                        MHEX
+  //                        YHEX
+  //                        MCSS
+  //                        YCSS
+  v = erg_ecp_inp__check_input_validity();
 
-  erg_LPC_inp_set_input_validity(b);
+  erg_ecp_inp__set_input_validity(v);
 
-  if ( b )
-    erg_LPC_set_current_color(erg_LPC_input.value);
+  if  (
+        ( v == eErgEcpColorValidity.YDEF )  ||
+        ( v == eErgEcpColorValidity.YHEX )
+      )
+  {
+    erg_ecp_cur__set(gErgEcp.Widgets.Input.txt.value);                                              //  hex / ""
+    return;
+  }
+
+  if  ( v == eErgEcpColorValidity.YCSS )
+  {
+    erg_ecp_cur__set(erg_ecp_util__get_color_hex_from_css(gErgEcp.Widgets.Input.txt.value));        //  css -> hex
+    return;
+  }
 
   //console.log("erg_LPC_inp_cbk_select():s[" + s + "]");
 }
 //  ################################################################################################
-function erg_LPC_lpc_update_xul_grid()
+//                    Last Picked Colors
+//  ################################################################################################
+function erg_ecp_lpc__update_xul_grid()
 {
-    let s, r, c;
-    let i;
+    var s, r, l, c;
+    var i, j, k;
+    var row, mi;
     //  ............................................................................................
-    s = erg_LPC_menulist.getAttribute("pickedColors");
+    s = gErgEcp.Widgets.Lpc.mnl.getAttribute("erg_ecp_VDOM_lpc__picked_colors");
 
-    //console .log("erg_LPC_lpc_uxg():grid [" + erg_LPC_grid + "]");
-    //console .log("erg_LPC_lpc_uxg():rows [" + erg_LPC_grid_rows + "]");
-    //console .log("erg_LPC_lpc_uxg():#rows[" + erg_LPC_grid_rows.childNodes.length + "]");
+    //console .log("erg_LPC_lpc_uxg():grid [" + gErgEcp.Widgets.Lpc.grid + "]");
+    //console .log("erg_LPC_lpc_uxg():rows [" + gErgEcp.Widgets.Lpc.grid_rows + "]");
+    //console .log("erg_LPC_lpc_uxg():#rows[" + gErgEcp.Widgets.Lpc.grid_rows.childNodes.length + "]");
 
     r = s.split(" ");
+    l = r.length;
 
-    console.log("erg_LPC_lpc_uxg():   s:[" + s + "]");
-    console.log("erg_LPC_lpc_uxg():  #r:[" + r.length + "]");
+    //console.log("erg_LPC_lpc_uxg():   s:[" + s + "]");
+    //console.log("erg_LPC_lpc_uxg():  #r:[" + l + "]");
     //console.log("erg_LPC_lpc_uxg():r[0]:[" + r[0] + "]");
     //console.log("erg_LPC_lpc_uxg():r[1]:[" + r[1] + "]");
 
-    for ( i = 0; i < 4 ; i++ )
+    for ( i = 0; i < gErgEcp.Lpc.grid_rows_card ; i++ )
     {
-        row = erg_LPC_grid_rows.childNodes[i];
+        row = gErgEcp.Widgets.Lpc.grid_rows.childNodes[i];
 
         for ( j = 0; j < 4 ; j++ )
         {
@@ -575,7 +676,7 @@ function erg_LPC_lpc_update_xul_grid()
 
             k = i * 4 + j;
 
-            if ( r.length > k )
+            if ( ( l != 0 ) && ( l > k ) )
             {
                 c = r[k];
             }
@@ -592,64 +693,109 @@ function erg_LPC_lpc_update_xul_grid()
      }
 }
 
-function erg_LPC_lpc_update_colors_list(_i_c)
+function erg_ecp_lpc__colors_list__has_color(_i_c)
 {
-    let s, r, d;
-    let i;
+    var s, r, l, c;
+    var i;
     //  ............................................................................................
-    s = erg_LPC_menulist.getAttribute("pickedColors");
+    s = gErgEcp.Widgets.Lpc.mnl.getAttribute("erg_ecp_VDOM_lpc__picked_colors");
 
     r = s.split(" ");
+    l = r.length;
 
-    for ( i = 0; i < r.length; i++ )
+    //console.log("lpc_cl_hc():l[" + l + "]");
+
+    for ( i = 0; i < l; i++ )
     {
-        d = r[i];
+        c = r[i];
 
-        if ( _i_c.localeCompare(d) == 0 )
+        if ( _i_c.localeCompare(c) == 0 )
         {
-            console.log("erg_LPC_lpc_ucl():already present [" + _i_c + "]");
-            break;
+            //console.log("lpc_cl_hc():Y[" + _i_c + "]");
+            return i;
         }
     }
 
-    if ( i == r.length )
-    {
-        s = _i_c + " " + s;
-        s = s.trim();
+    //console.log("lpc_cl_hc():N[" + _i_c + "]");
+    return -1;
+}
 
-        console.log("erg_LPC_lpc_ucl():added [" + _i_c + "]");
+function erg_ecp_lpc__colors_list__prepend_color(_i_c)
+{
+    var s;
+    var a1, l1;
+    var a2;
+    var i, imax;
+    //  ............................................................................................
+    if ( erg_ecp_lpc__colors_list__has_color(_i_c) >= 0 )
+    {
+      console.log("lpc_cl_ac():already present [" + _i_c + "]");
+      return;
     }
 
+    //  roll the list and add the new color at the first place
+    s = gErgEcp.Widgets.Lpc.mnl.getAttribute("erg_ecp_VDOM_lpc__picked_colors");
 
-    erg_LPC_menulist.setAttribute("pickedColors", s);
-    console.log("erg_LPC_lpc_ucl():s[" + s + "]");
+    console.log("lpc_cl_ac():s[" + s + "]");
+
+    a1 = s.split(" ");
+    l1 = a1.length;
+
+    a2 = new Array();
+
+    imax = Math.min(l1, gErgEcp.Lpc.card);
+
+    for ( i = 0 ; i < imax ; i++ )
+    {
+      if ( i != ( imax - 1 ) )
+        a2[i+1] = a1[i];
+    }
+
+    a2[0] = _i_c;
+
+    s = a2.join(' ');
+    s = s.trim();
+
+    gErgEcp.Widgets.Lpc.mnl.setAttribute("erg_ecp_VDOM_lpc__picked_colors", s);
+    console.log("lpc_cl_ac():added [" + _i_c + "]");
+    console.log("lpc_cl_ac():s[" + s + "]");
 }
 
-function erg_LPC_lpc_cbk_changed(_i_evt)
+function erg_ecp_lpc__cbk_changed(_i_evt)
 {
-  erg_LPC_bt_lpc.style.setProperty("background-color", _i_evt.target.value);
-  erg_LPC_bt_lpc.setAttribute("bgColHex", _i_evt.target.value);
+  gErgEcp.Widgets.Lpc.btn.style.setProperty("background-color", _i_evt.target.value);
+  gErgEcp.Widgets.Lpc.btn.setAttribute("erg_ecp_VDOM_lpc__btn_bg_col_hex", _i_evt.target.value);
 
-  erg_LPC_menulist.setAttribute("label", "Last-picked colors");
+  gErgEcp.Widgets.Lpc.mnl.setAttribute("label", "Last-picked colors");
 
   //  change the global selected color, avoiding the user having to click the button
-  erg_LPC_set_current_color(_i_evt.target.value);
+  erg_ecp_cur__set(_i_evt.target.value);                                                            //  hex color
 }
 
-function erg_LPC_lpc_cbk_select()
+function erg_ecp_lpc__cbk_clicked()
 {
   //  if we read the "background-color" property value, we get rgb(a,b,c) crap
-  //  so we have to store it in a additionnal attribute "bgColHex"
-  let c = erg_LPC_bt_lpc.getAttribute("bgColHex");
+  //  so we have to store it in a additionnal attribute "erg_ecp_VDOM_lpc__btn_bg_col_hex"
+  let c = gErgEcp.Widgets.Lpc.btn.getAttribute("erg_ecp_VDOM_lpc__btn_bg_col_hex");
 
   // set global color
-  erg_LPC_set_current_color(c);
+  erg_ecp_cur__set(c);                                                                              //  hex color
 
   return true;
 }
+//  ################################################################################################
+//                    Old code
+//  ################################################################################################
+/*
+function SetDefaultToOk() {
 
+    console.log("SetDefaultToOk():+");
 
-//  gDialog.LastPickedButton.style["background-color"] = e.target.value;
-//  erg_LPC_box.style.setProperty("background-color", "#555555");
-//  erg_LPC_bt_lpc.setAttribute("background-color", e.target.value); NO
+    // ERG+
+    //      gDialog.LastPickedButton.removeAttribute("default");
+    gErgEcp.Widgets.Lpc.btn.removeAttribute("default");
+    // ERG-
+  gDialog.Ok.setAttribute("default", "true");
+}
+*/
 

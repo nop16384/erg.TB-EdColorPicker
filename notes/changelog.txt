@@ -1,0 +1,13 @@
+====================================================================================================
+v-001
+====================================================================================================
+- Proof of concept
+====================================================================================================
+v-002
+====================================================================================================
+- removed modifications in EdDialogCommon.js ( in SetWindowLocation() ), instead the
+  erg_ecp_util__set_window_location() function has been created.
+
+- integration of of erg.build-tools
+
+- no further functionalities planned, only debugging / tuning

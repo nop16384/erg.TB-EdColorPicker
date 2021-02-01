@@ -21,7 +21,7 @@
   <script src="chrome://messenger/content/messengercompose/EdColorPicker.js"/>
   <script src="chrome://messenger/content/dialogShadowDom.js"/>
 
-  <spacer id="location" offsetY="50" persist="offsetX offsetY"/>
+  <spacer id="location" offsetX="50" offsetY="50" persist="offsetX offsetY"/>
 
   <hbox id="TableOrCellGroup" align="center" collapsed="true">
     <label control="CellOrTableGroup" value="&background.label;" accesskey="&background.accessKey;"/>
@@ -31,7 +31,9 @@
   </radiogroup>
   </hbox>
 
-  <!-- ######################################################################################### -->
+  <!-- #########################################################################################
+       GRID
+       ######################################################################################### -->
   <grid flex="1">
     <columns>
       <column flex="2"/>
@@ -40,40 +42,57 @@
     <rows>
       <row>
 
+        <!-- ###################################################################################
+             COLOR PICKER
+             ################################################################################### -->
         <hbox>
 
           <html:input type="color" id="ColorPicker"
             ondblclick="if (onAccept()) { window.close(); }"
-            onkeypress="SelectColorByKeypress(event);"
-            onchange="SelectColor();"/>
+            onkeypress="erg_ecp_cpk__cbk_keypress(event);"
+            onchange="erg_ecp_cpk__cbk_changed();"/>
         </hbox>
 
+        <!-- ###################################################################################
+             LAST PICKED COLORS
+             ################################################################################### -->
         <hbox>
           <menulist
-            id="erg_LPC_menulist"
+            id="erg_ecp_EDOM_lpc__mnl"
             label="Last"
             crop="none"
             sizetopopup="none"
             pickedColors=""
-            oncommand="erg_LPC_lpc_cbk_changed(event)"
-            persist="pickedColors">
+            oncommand="erg_ecp_lpc__cbk_changed(event)"
+            persist="erg_ecp_VDOM_lpc__picked_colors">
 
             <menupopup
-              id="erg_LPC_menupopup"
-              style="max-height:100px; min-width:10px; width:130px; overflow:scroll;">
+              style="min-width:10px; width:130px; max-height:152px; overflow:scroll;">
 
               <box style="padding:2px;">
                 <menuitem label="#556677" value="#556677" style="background-color:#556677; width:112px"/>
               </box>
 
-              <grid id="erg_LPC_grid">
+              <grid id="erg_ecp_EDOM_lpc__grid">
                 <columns>
                 <column style="padding:2px;"/>
                 <column style="padding:2px;"/>
                 <column style="padding:2px;"/>
                 <column style="padding:2px;"/>
                 </columns>
-                <rows id="erg_LPC_grid_rows">
+                <rows id="erg_ecp_EDOM_lpc__grid_rows">
+                  <row style="padding:2px;">
+                    <menuitem label="xxx" value="#da504d" style="background-color:#da504d; min-width:10px; width:25px;"/>
+                    <menuitem label="xxx" value="#ffa500" style="background-color:#ffa500; min-width:10px; width:25px;"/>
+                    <menuitem label="xxx" value="#ffc0cb" style="background-color:#ffc0cb; min-width:10px; width:25px;"/>
+                    <menuitem label="xxx" value="#90ee90" style="background-color:#90ee90; min-width:10px; width:25px;"/>
+                  </row>
+                  <row style="padding:2px;">
+                    <menuitem label="xxx" value="#da504d" style="background-color:#da504d; min-width:10px; width:25px;"/>
+                    <menuitem label="xxx" value="#ffa500" style="background-color:#ffa500; min-width:10px; width:25px;"/>
+                    <menuitem label="xxx" value="#ffc0cb" style="background-color:#ffc0cb; min-width:10px; width:25px;"/>
+                    <menuitem label="xxx" value="#90ee90" style="background-color:#90ee90; min-width:10px; width:25px;"/>
+                  </row>
                   <row style="padding:2px;">
                     <menuitem label="xxx" value="#da504d" style="background-color:#da504d; min-width:10px; width:25px;"/>
                     <menuitem label="xxx" value="#ffa500" style="background-color:#ffa500; min-width:10px; width:25px;"/>
@@ -108,16 +127,16 @@
           <spacer flex="1"/>
 
           <vbox
-            id="erg_LPC_box"
+            id="erg_ecp_EDOM_lpc__vbox"
             style="padding-top:2px; min-width:10px;  width:30px; height:15px; border:none;"
             LastTextColor=""
             LastBackgroundColor=""
             persist="LastTextColor LastBackgroundColor">
 
-            <button id="erg_LPC_bt_lpc"
+            <button id="erg_ecp_EDOM_lpc__btn"
               style="min-height:10px; min-width:10px; width:20px; height:20px; background-color:#aabb55;"
-              bgColHex="#aabb55"
-              oncommand="erg_LPC_lpc_cbk_select()">
+              erg_ecp_VDOM_lpc__btn_bg_col_hex="#aabb55"
+              oncommand="erg_ecp_lpc__cbk_clicked()">
             </button>
           </vbox>
 
@@ -127,22 +146,27 @@
 
       <row>
 
+        <!-- ###################################################################################
+             DEFAULT BUTTON
+             ################################################################################### -->
         <hbox>
           <button id="DefaultColorButton" label="&default.label;" accesskey="&default.accessKey;" oncommand="RemoveColor()"/>
         </hbox>
 
+        <!-- ###################################################################################
+             CSS COLORS
+             ################################################################################### -->
         <hbox>
 
           <menulist
-            id="erg_LPC_ml_named_colors"
+            id="erg_ecp_EDOM_css__mnl"
             label="CSS colors"
             crop="none"
             sizetopopup="none"
-            oncommand="erg_LPC_css_cbk_changed(event)">
+            oncommand="erg_ecp_css__cbk_changed(event)">
 
             <menupopup
-              id="erg_LPC_nc_menupopup"
-              style="font-size:12px; max-height:200px; min-width:10px; width:130px; overflow:scroll;">
+              style="font-size:12px; max-height:500px; min-width:10px; width:130px; overflow:scroll;">
 __ERG_MARK__CSS_COLORS_XHTML_01__
             </menupopup>
           </menulist>
@@ -151,10 +175,10 @@ __ERG_MARK__CSS_COLORS_XHTML_01__
 
           <vbox
             style="padding-top:2px;  min-width:10px;  width:30px; height:15px; border:none;">
-            <button id="erg_LPC_bt_css"
+            <button id="erg_ecp_EDOM_css__btn"
               style="min-height:10px; min-width:10px; width:20px; height:20px; background-color:#aabb55;"
-              bgColHex="#aabb55"
-              oncommand="erg_LPC_css_cbk_select()">
+              erg_ecp_VDOM_css__btn_bg_col_hex="#aabb55"
+              oncommand="erg_ecp_css__cbk_clicked()">
             </button>
           </vbox>
 
@@ -163,7 +187,9 @@ __ERG_MARK__CSS_COLORS_XHTML_01__
       </row>
     </rows>
   </grid>
-  <!-- ######################################################################################### -->
+  <!-- #########################################################################################
+       COLOR INPUT
+       ######################################################################################### -->
   <separator class="groove"/>
 
   <hbox align="center" flex="1">
@@ -173,14 +199,14 @@ __ERG_MARK__CSS_COLORS_XHTML_01__
       <label class="tip-caption" value="&setColorExample.label;"/>
     </vbox>
 
-    <html:input id="ColorInput" type="text" style="width: 8em"
-      oninput="erg_LPC_inp_cbk_select();"/>
+    <html:input id="erg_ecp_EDOM_inp__txt" type="text" style="width: 8em"
+      oninput="erg_ecp_inp__cbk_input();"/>
 
     <label id="ColorPickerSwatch"/>
 
-    <button id="erg_LPC_bt_inp"
+    <button id="erg_ecp_EDOM_inp__btn"
       style="min-height:5px; min-width:10px; width:30px; height:20px; background-color:#aabb55;"
-      bgColHex="#aabb55"
+      erg_ecp_VDOM_inp__btn_bg_col_hex="#aabb55"
       oncommand="">
     </button>
 
