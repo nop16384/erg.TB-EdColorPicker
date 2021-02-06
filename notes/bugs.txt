@@ -1,0 +1,9 @@
+-B(001) The number of last picked colors does not grow.
+====================================================================================================
+v-002 => v-003
+====================================================================================================
+B(001) 04.02.2021
+  [src/EdColorPicker-template.js][erg_ecp_lpc__colors_list__prepend_color()]
+  stupid test in the main loop.
+
+

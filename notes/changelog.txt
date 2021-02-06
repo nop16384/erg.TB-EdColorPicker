@@ -11,3 +11,5 @@ v-002
 - integration of of erg.build-tools
 
 - no further functionalities planned, only debugging / tuning
+
+[06.02.21]  replaced console.log() by erg_ecp_log()

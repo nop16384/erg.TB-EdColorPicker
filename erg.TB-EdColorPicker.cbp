@@ -62,6 +62,9 @@
 		<Unit filename="build/build.bash">
 			<Option virtualFolder="build/" />
 		</Unit>
+		<Unit filename="notes/bugs.txt">
+			<Option virtualFolder="notes/" />
+		</Unit>
 		<Unit filename="notes/changelog.txt">
 			<Option virtualFolder="notes/" />
 		</Unit>

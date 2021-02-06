@@ -91,6 +91,8 @@ function Startup() {
   //  ..............................................................................................
   gErgEcp                     =   new Object();
 
+    gErgEcp.log               =   true;
+
     gErgEcp.Lpc               =   new Object();
 
     gErgEcp.Widgets           =   new Object();
@@ -115,7 +117,7 @@ function Startup() {
   gErgEcp.Lpc.card                  =   gErgEcp.Lpc.grid_rows_card * 4;
 
   erg_init_colors_array();
-    console.log("Startup():s[" +
+    erg_ecp_log("Startup():s[" +
       gErgEcp.Widgets.Lpc.mnl.getAttribute("erg_ecp_VDOM_lpc__picked_colors") + "]");
   erg_ecp_lpc__update_xul_grid();
 
@@ -222,7 +224,7 @@ function Startup() {
 
   if ( ! LastPickedColor )
   {
-    console.log("Startup():!LastPickedColor");
+    erg_ecp_log("Startup():!LastPickedColor");
     gErgEcp.Widgets.Lpc.btn.style.setProperty("background-color", "inherit");
     gErgEcp.Widgets.Lpc.btn.setAttribute("erg_ecp_VDOM_lpc__btn_bg_col_hex", "");
     // Hide the button, as there is no last color available.
@@ -270,6 +272,14 @@ function Startup() {
 //  ################################################################################################
 //                      Utils
 //  ################################################################################################
+function erg_ecp_log(_i_s)
+{
+  if ( gErgEcp.log == true )
+  {
+    erg_ecp_log(_i_s);
+  }
+}
+
 function erg_ecp_util__set_window_location()
 {
   gLocation = document.getElementById("location");
@@ -288,16 +298,16 @@ function erg_ecp_util__set_window_location()
     var iw = window.innerWidth;
     var ih = window.innerHeight;
 
-    //console.log("SetWindowLocation():px[" + px + "] py[" + py + "]");
-    //console.log("                   :ox[" + ox + "] oy[" + oy + "]");
-    //console.log("                   :aw[" + aw + "] ah[" + ah + "]");
-    //console.log("                   :iw[" + iw + "] ih[" + ih + "]");
+    //erg_ecp_log("SetWindowLocation():px[" + px + "] py[" + py + "]");
+    //erg_ecp_log("                   :ox[" + ox + "] oy[" + oy + "]");
+    //erg_ecp_log("                   :aw[" + aw + "] ah[" + ah + "]");
+    //erg_ecp_log("                   :iw[" + iw + "] ih[" + ih + "]");
 
     var cx = Number(px) + Number(ox);
     var cy = Number(py) + Number(oy);
 
-    //console.log("                   :cx[" + cx + "] cy[" + cy + "]");
-    //console.log("                   :wx[" + screen.width + "]");
+    //erg_ecp_log("                   :cx[" + cx + "] cy[" + cy + "]");
+    //erg_ecp_log("                   :wx[" + screen.width + "]");
 
     window.moveTo(cx,cy);
   }
@@ -337,16 +347,16 @@ function erg_ecp_util__check_color_string_validity__hex(_i_s)
   {
     c = _i_s.charCodeAt(i);
 
-    //console.log("--> " + c);
+    //erg_ecp_log("--> " + c);
 
     if  ( ! erg_ecp_util__is_hexdigit(c) )
     {
-      //console.log("    bad");
+      //erg_ecp_log("    bad");
       return eErgEcpColorValidity.N;
     }
     //else
     //{
-    //  console.log("    ok");
+    //  erg_ecp_log("    ok");
     //}
   }
   return eErgEcpColorValidity.YHEX;
@@ -418,7 +428,7 @@ function erg_ecp_cur__set_swatch(_i_c)
 
   gErgEcp.Widgets.Input.btn.style.setProperty("background-color", _i_c);
 
-  console.log("erg_ecp_cur__set_swatch():[" + _i_c + "]");
+  erg_ecp_log("erg_ecp_cur__set_swatch():[" + _i_c + "]");
 }
 
 function erg_ecp_cur__set(color)
@@ -441,7 +451,7 @@ function erg_ecp_cur__set(color)
 
   erg_ecp_cur__set_swatch(gColor);
 
-  console.log("erg_ecp_cur__set():gColor[" + c + "] -- > [" + gColor + "]");
+  erg_ecp_log("erg_ecp_cur__set():gColor[" + c + "] -- > [" + gColor + "]");
 }
 //  ################################################################################################
 //                    Dialog box buttons ( OK, Cancel, ... )
@@ -638,7 +648,7 @@ function erg_ecp_inp__cbk_input()
     return;
   }
 
-  //console.log("erg_LPC_inp_cbk_select():s[" + s + "]");
+  //erg_ecp_log("erg_LPC_inp_cbk_select():s[" + s + "]");
 }
 //  ################################################################################################
 //                    Last Picked Colors
@@ -658,10 +668,10 @@ function erg_ecp_lpc__update_xul_grid()
     r = s.split(" ");
     l = r.length;
 
-    //console.log("erg_LPC_lpc_uxg():   s:[" + s + "]");
-    //console.log("erg_LPC_lpc_uxg():  #r:[" + l + "]");
-    //console.log("erg_LPC_lpc_uxg():r[0]:[" + r[0] + "]");
-    //console.log("erg_LPC_lpc_uxg():r[1]:[" + r[1] + "]");
+    //erg_ecp_log("erg_LPC_lpc_uxg():   s:[" + s + "]");
+    //erg_ecp_log("erg_LPC_lpc_uxg():  #r:[" + l + "]");
+    //erg_ecp_log("erg_LPC_lpc_uxg():r[0]:[" + r[0] + "]");
+    //erg_ecp_log("erg_LPC_lpc_uxg():r[1]:[" + r[1] + "]");
 
     for ( i = 0; i < gErgEcp.Lpc.grid_rows_card ; i++ )
     {
@@ -688,7 +698,7 @@ function erg_ecp_lpc__update_xul_grid()
             mi.style.setProperty("background-color", c);
             mi.value = c;
 
-            //console.log("erg_LPC_lpc_uxg():[" + i + "][" + j + "]=[" + c + "]");
+            //erg_ecp_log("erg_LPC_lpc_uxg():[" + i + "][" + j + "]=[" + c + "]");
         }
      }
 }
@@ -703,7 +713,7 @@ function erg_ecp_lpc__colors_list__has_color(_i_c)
     r = s.split(" ");
     l = r.length;
 
-    //console.log("lpc_cl_hc():l[" + l + "]");
+    //erg_ecp_log("lpc_cl_hc():l[" + l + "]");
 
     for ( i = 0; i < l; i++ )
     {
@@ -711,12 +721,12 @@ function erg_ecp_lpc__colors_list__has_color(_i_c)
 
         if ( _i_c.localeCompare(c) == 0 )
         {
-            //console.log("lpc_cl_hc():Y[" + _i_c + "]");
+            //erg_ecp_log("lpc_cl_hc():Y[" + _i_c + "]");
             return i;
         }
     }
 
-    //console.log("lpc_cl_hc():N[" + _i_c + "]");
+    //erg_ecp_log("lpc_cl_hc():N[" + _i_c + "]");
     return -1;
 }
 
@@ -725,40 +735,39 @@ function erg_ecp_lpc__colors_list__prepend_color(_i_c)
     var s;
     var a1, l1;
     var a2;
-    var i, imax;
+    var i, card;
     //  ............................................................................................
     if ( erg_ecp_lpc__colors_list__has_color(_i_c) >= 0 )
     {
-      console.log("lpc_cl_ac():already present [" + _i_c + "]");
+      erg_ecp_log("lpc_cl_pc():already present [" + _i_c + "]");
       return;
     }
 
     //  roll the list and add the new color at the first place
     s = gErgEcp.Widgets.Lpc.mnl.getAttribute("erg_ecp_VDOM_lpc__picked_colors");
 
-    console.log("lpc_cl_ac():s[" + s + "]");
 
     a1 = s.split(" ");
     l1 = a1.length;
 
+    erg_ecp_log("lpc_cl_pc():s[" + a1.length + "][" + s + "]");
+
     a2 = new Array();
 
-    imax = Math.min(l1, gErgEcp.Lpc.card);
+    card = Math.min(l1, gErgEcp.Lpc.card);
 
-    for ( i = 0 ; i < imax ; i++ )
+    for ( i = 0 ; i < card ; i++ )
     {
-      if ( i != ( imax - 1 ) )
         a2[i+1] = a1[i];
     }
 
     a2[0] = _i_c;
 
     s = a2.join(' ');
-    s = s.trim();
 
     gErgEcp.Widgets.Lpc.mnl.setAttribute("erg_ecp_VDOM_lpc__picked_colors", s);
-    console.log("lpc_cl_ac():added [" + _i_c + "]");
-    console.log("lpc_cl_ac():s[" + s + "]");
+    erg_ecp_log("lpc_cl_pc():added [" + _i_c + "]");
+    erg_ecp_log("lpc_cl_pc():s[" + a2.length + "][" + s + "]");
 }
 
 function erg_ecp_lpc__cbk_changed(_i_evt)
@@ -789,7 +798,7 @@ function erg_ecp_lpc__cbk_clicked()
 /*
 function SetDefaultToOk() {
 
-    console.log("SetDefaultToOk():+");
+    erg_ecp_log("SetDefaultToOk():+");
 
     // ERG+
     //      gDialog.LastPickedButton.removeAttribute("default");
