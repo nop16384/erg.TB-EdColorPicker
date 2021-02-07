@@ -276,7 +276,7 @@ function erg_ecp_log(_i_s)
 {
   if ( gErgEcp.log == true )
   {
-    erg_ecp_log(_i_s);
+    console.log(_i_s);
   }
 }
 

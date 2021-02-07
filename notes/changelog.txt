@@ -3,7 +3,7 @@ v-001
 ====================================================================================================
 - Proof of concept
 ====================================================================================================
-v-002
+v-003
 ====================================================================================================
 - removed modifications in EdDialogCommon.js ( in SetWindowLocation() ), instead the
   erg_ecp_util__set_window_location() function has been created.
@@ -13,3 +13,12 @@ v-002
 - no further functionalities planned, only debugging / tuning
 
 [06.02.21]  replaced console.log() by erg_ecp_log()
+====================================================================================================
+v-004
+====================================================================================================
+[07.02.21]  [src/EdColorPicker-template.xhtml] : Removed the horizontal unicolor bar in
+  LastPickedColor popup, that was a rest of development process.
+
+    <box style="padding:2px;">
+      <menuitem label="#556677" value="#556677" style="background-color:#556677; width:112px"/>
+    </box>
