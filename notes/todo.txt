@@ -1,0 +1,11 @@
+-(001) [xx.xx.xxxx]  DefaultToOk stuff
+
+-(002) [xx.xx.xxxx]  Dialog screen placement replacement
+
+-(003) [xx.xx.xxxx] See if we should regroup all VDOM inside one widget
+  properties instead of having them scattered
+
+-(004) [02.04.2021] Include the "transparent" color
+====================================================================================================
+v-xxx
+====================================================================================================

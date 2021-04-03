@@ -5,7 +5,7 @@
 		<Option title="erg.TB-EdColorPicker" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="EdColorPicker/;res/;build/;omni/;notes/;" />
+		<Option virtualFolders="EdColorPicker/;EdColorPicker/buffer/;res/;build/;notes/;omni/;" />
 		<Build>
 			<Target title="GenColors">
 				<Option output="bin/D/erg" prefix_auto="1" extension_auto="1" />
@@ -53,10 +53,10 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="../../../../sys/usr/local/Thunderbird/omni/chrome/messenger/content/messenger/messengercompose/EdColorPicker.js">
+		<Unit filename="../../../../sys/usr/local/Thunderbird/omni-78.8.1/chrome/messenger/content/messenger/messengercompose/EdColorPicker.js">
 			<Option virtualFolder="omni/" />
 		</Unit>
-		<Unit filename="../../../../sys/usr/local/Thunderbird/omni/chrome/messenger/content/messenger/messengercompose/EdColorPicker.xhtml">
+		<Unit filename="../../../../sys/usr/local/Thunderbird/omni-78.8.1/chrome/messenger/content/messenger/messengercompose/EdColorPicker.xhtml">
 			<Option virtualFolder="omni/" />
 		</Unit>
 		<Unit filename="build/build.bash">
@@ -66,6 +66,9 @@
 			<Option virtualFolder="notes/" />
 		</Unit>
 		<Unit filename="notes/changelog.txt">
+			<Option virtualFolder="notes/" />
+		</Unit>
+		<Unit filename="notes/todo.txt">
 			<Option virtualFolder="notes/" />
 		</Unit>
 		<Unit filename="res/css-colors--generate.bash">
@@ -112,6 +115,11 @@
 		</Unit>
 		<Unit filename="src/EdColorPicker-template.xhtml">
 			<Option virtualFolder="EdColorPicker/" />
+		</Unit>
+		<Unit filename="src/buffer/buffer.js">
+			<Option virtualFolder="EdColorPicker/buffer/" />
+			<Option target="Export" />
+			<Option target="All" />
 		</Unit>
 		<Extensions>
 			<envvars />

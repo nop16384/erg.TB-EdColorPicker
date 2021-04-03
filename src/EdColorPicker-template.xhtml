@@ -116,6 +116,10 @@
                 </rows>
               </grid>
 
+              <box style="padding:2px;">
+                <menuitem label="Reset" value="#RESET" style="align:center; background-color:#cccccc; width:112px"/>
+              </box>
+
             </menupopup>
 
           </menulist>
@@ -146,7 +150,7 @@
              DEFAULT BUTTON
              ################################################################################### -->
         <hbox>
-          <button id="DefaultColorButton" label="&default.label;" accesskey="&default.accessKey;" oncommand="RemoveColor()"/>
+          <button id="DefaultColorButton" label="&default.label;" accesskey="&default.accessKey;" oncommand="onDefault()"/>
         </hbox>
 
         <!-- ###################################################################################
