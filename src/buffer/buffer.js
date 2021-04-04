@@ -37,12 +37,18 @@ function ErgEcpLpcBuffer(_i_str, _i_max_card)
       this.a_max_card = _i_max_card;
     }
     //  ............................................................................................
-    a             = s.split(" ");
     this.d_array  = new Array();
 
-    for ( i = 0 ; i < Math.min(a.length, this.a_max_card) ; i++ )
+    //  __ERG_TEK__ When you split an empty string, javascript returns an array with 1 element
+    //  containing 1 empty string. Why does it not return an empty array ??????
+    if ( _i_str.length != 0 )
     {
-      this.d_array[i] = a[i];
+      a = _i_str.split(" ");
+
+      for ( i = 0 ; i < Math.min(a.length, this.a_max_card) ; i++ )
+      {
+        this.d_array[i] = a[i];
+      }
     }
   }
   //  ==============================================================================================
@@ -73,8 +79,6 @@ function ErgEcpLpcBuffer(_i_str, _i_max_card)
   {
     var l, m, i, p;
     //  ............................................................................................
-    //  console.log("Prepend");
-
     l = this.d_array.length;
     m = this.a_max_card;
 

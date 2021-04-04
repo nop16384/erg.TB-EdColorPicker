@@ -29,8 +29,6 @@ function ErgEcpLpcBuffer(_i_str, _i_max_card)
   {
     var s, a, i;
     //  ............................................................................................
-    erg_ecp_log("ErgEcpLpcBuffer::construct():[" + _i_str + "]");
-    //  ............................................................................................
     if ( ( _i_str != undefined ) && ( _i_str != null ) )
     {
       s  = _i_str.trim();
@@ -91,8 +89,6 @@ function ErgEcpLpcBuffer(_i_str, _i_max_card)
   {
     var l, m, i, p;
     //  ............................................................................................
-    //  console.log("Prepend");
-
     l = this.d_array.length;
     m = this.a_max_card;
 
@@ -151,14 +147,66 @@ __ERG_MARK__CSS_COLORS_JS_01__
 //  ################################################################################################
 //                      Utils
 //  ################################################################################################
-function erg_ecp_log(_i_s)
+function _erg_ecp_log(_i_cha, _i_s)
 {
-  if ( gErgEcp.log == true )
-  {
-    console.log(_i_s);
-  }
+  if ( ! eval("gErgEcp.Log." + _i_cha ) )
+    return;
+
+  console.log("(ErgEcp)" + _i_cha + "::" + _i_s);
 }
 
+function erg_ecpl_ctp(_i_s)                                                                         //  Color TyPe
+{
+  _erg_ecp_log("ctp", _i_s)
+}
+
+function erg_ecpl_lpc(_i_s)                                                                         //  Last Picked Color
+{
+  _erg_ecp_log("lpc", _i_s)
+}
+
+function erg_ecpl_csv_hex(_i_s)                                                                     //  Color Srting Validity Hex
+{
+  _erg_ecp_log("csvhex", _i_s)
+}
+
+function erg_ecpl_curswa(_i_s)                                                                      //  CURrent color SWAtch
+{
+  _erg_ecp_log("curswa", _i_s)
+}
+
+function erg_ecpl_curcol(_i_s)                                                                      //  CURrent Col
+{
+  _erg_ecp_log("curcol", _i_s)
+}
+
+function erg_ecpl_inp(_i_s)                                                                         //  color INPut
+{
+  _erg_ecp_log("inp", _i_s)
+}
+
+function erg_ecpl_xug(_i_s)                                                                         //  XUl Grid
+{
+  _erg_ecp_log("xug", _i_s)
+}
+
+function erg_ecpl_cds(_i_s)                                                                         //  Color Dom String
+{
+  _erg_ecp_log("cds", _i_s)
+}
+
+function erg_ecpl_set_all(_i_b)
+{
+  gErgEcp.Log.ctp     = _i_b;
+  gErgEcp.Log.lpc     = _i_b;
+  gErgEcp.Log.csvhex  = _i_b;
+  gErgEcp.Log.curswa  = _i_b;
+  gErgEcp.Log.curcol  = _i_b;
+  gErgEcp.Log.inp     = _i_b;
+  gErgEcp.Log.xug     = _i_b;
+  gErgEcp.Log.cds     = _i_b;
+}
+//  ************************************************************************************************
 function erg_ecp_util__set_window_location()
 {
   gLocation = document.getElementById("location");
@@ -177,16 +225,8 @@ function erg_ecp_util__set_window_location()
     var iw = window.innerWidth;
     var ih = window.innerHeight;
 
-    //erg_ecp_log("SetWindowLocation():px[" + px + "] py[" + py + "]");
-    //erg_ecp_log("                   :ox[" + ox + "] oy[" + oy + "]");
-    //erg_ecp_log("                   :aw[" + aw + "] ah[" + ah + "]");
-    //erg_ecp_log("                   :iw[" + iw + "] ih[" + ih + "]");
-
     var cx = Number(px) + Number(ox);
     var cy = Number(py) + Number(oy);
-
-    //erg_ecp_log("                   :cx[" + cx + "] cy[" + cy + "]");
-    //erg_ecp_log("                   :wx[" + screen.width + "]");
 
     window.moveTo(cx,cy);
   }
@@ -226,17 +266,17 @@ function erg_ecp_util__check_color_string_validity__hex(_i_s)
   {
     c = _i_s.charCodeAt(i);
 
-    //erg_ecp_log("--> " + c);
+    erg_ecpl_csv_hex("c[" + c + "]");
 
     if  ( ! erg_ecp_util__is_hexdigit(c) )
     {
-      //erg_ecp_log("    bad");
+      erg_ecpl_csv_hex("bad");
       return eErgEcpColorValidity.N;
     }
-    //else
-    //{
-    //  erg_ecp_log("    ok");
-    //}
+    else
+    {
+      erg_ecpl_csv_hex("ok");
+    }
   }
   return eErgEcpColorValidity.YHEX;
 }
@@ -307,14 +347,14 @@ function erg_ecp_cur__set_swatch(_i_c)
 
   gErgEcp.Widgets.Input.btn.style.setProperty("background-color", _i_c);
 
-  erg_ecp_log("erg_ecp_cur__set_swatch():[" + _i_c + "]");
+  erg_ecpl_curswa("erg_ecp_cur__set_swatch():[" + _i_c + "]");
 }
 
 function erg_ecp_cur__set(_i_c)
 {
   var c;
   //  ..............................................................................................
-  erg_ecp_log(_i_c);
+  erg_ecpl_curcol("erg_ecp_cur__set():[" + _i_c + "]");
 
   c = _i_c;
 
@@ -532,7 +572,7 @@ function erg_ecp_inp__cbk_input()
     return;
   }
 
-  //erg_ecp_log("erg_LPC_inp_cbk_select():s[" + s + "]");
+  erg_ecpl_inp("erg_LPC_inp_cbk_select():s[" + s + "]");
 }
 //  ################################################################################################
 //                    Last Picked Colors
@@ -543,17 +583,9 @@ function erg_ecp_lpc__update_xul_grid()
     var c;
     var row, mi;
     //  ............................................................................................
-    //console .log("erg_LPC_lpc_uxg():grid [" + gErgEcp.Widgets.Lpc.grid + "]");
-    //console .log("erg_LPC_lpc_uxg():rows [" + gErgEcp.Widgets.Lpc.grid_rows + "]");
-    //console .log("erg_LPC_lpc_uxg():#rows[" + gErgEcp.Widgets.Lpc.grid_rows.childNodes.length + "]");
-
-    //r = s.split(" ");
-    //l = r.length;
-
-    //erg_ecp_log("erg_LPC_lpc_uxg():   s:[" + s + "]");
-    //erg_ecp_log("erg_LPC_lpc_uxg():  #r:[" + l + "]");
-    //erg_ecp_log("erg_LPC_lpc_uxg():r[0]:[" + r[0] + "]");
-    //erg_ecp_log("erg_LPC_lpc_uxg():r[1]:[" + r[1] + "]");
+    erg_ecpl_xug("erg_LPC_lpc_uxg():grid [" + gErgEcp.Widgets.Lpc.grid + "]");
+    erg_ecpl_xug("erg_LPC_lpc_uxg():rows [" + gErgEcp.Widgets.Lpc.grid_rows + "]");
+    erg_ecpl_xug("erg_LPC_lpc_uxg():#rows[" + gErgEcp.Widgets.Lpc.grid_rows.childNodes.length + "]");
 
     for ( i = 0; i < gErgEcp.Lpc.grid_rows_card ; i++ )
     {
@@ -563,8 +595,8 @@ function erg_ecp_lpc__update_xul_grid()
         {
             mi = row.childNodes[j];
 
-            //console .log("erg_LPC_update_last_picked_colors():row [" + row + "]");
-            //console .log("erg_LPC_update_last_picked_colors(): mi [" + mi  + "]");
+            //erg_ecpl_xug("erg_LPC_update_last_picked_colors():row [" + row + "]");
+            //erg_ecpl_xug("erg_LPC_update_last_picked_colors(): mi [" + mi  + "]");
 
             k = i * 4 + j;
 
@@ -579,7 +611,7 @@ function erg_ecp_lpc__update_xul_grid()
             mi.style.setProperty("background-color", c);
             mi.value = c;
 
-            //erg_ecp_log("erg_LPC_lpc_uxg():[" + i + "][" + j + "]=[" + c + "]");
+            erg_ecpl_xug("erg_LPC_lpc_uxg():[" + i + "][" + j + "]=[" + c + "]");
         }
      }
 }
@@ -589,17 +621,19 @@ function erg_ecp_lpc__colors_list__load_from_DOM()
   gErgEcp.Lpc.buffer                =   new ErgEcpLpcBuffer(
     gErgEcp.Widgets.Lpc.mnl.getAttribute("erg_ecp_VDOM_lpc__picked_colors") ,
     gErgEcp.Lpc.card                                                        );
+
+  erg_ecpl_cds("erg_ecp_lpc__colors_list__load_from_DOM():");
+  gErgEcp.Lpc.buffer.dump();
 }
 
 function erg_ecp_lpc__colors_list__save_to_DOM()
 {
+  erg_ecpl_cds("erg_ecp_lpc__colors_list__save_to_DOM():");
+  gErgEcp.Lpc.buffer.dump();
+
   gErgEcp.Widgets.Lpc.mnl.setAttribute
     ( "erg_ecp_VDOM_lpc__picked_colors" ,
       gErgEcp.Lpc.buffer.get_string()   );
-
-  erg_ecp_log("erg_ecp_lpc__colors_list__save_to_DOM():");
-  gErgEcp.Lpc.buffer.dump();
-
 }
 
 function erg_ecp_lpc__colors_list__prepend_color(_i_c)
@@ -609,11 +643,11 @@ function erg_ecp_lpc__colors_list__prepend_color(_i_c)
     var a2;
     var i, card;
     //  ............................................................................................
-    erg_ecp_log("lpc_cl_pc():[" + _i_c + "]");
+    erg_ecpl_lpc("erg_ecp_lpc__colors_list__prepend_color():[" + _i_c + "]");
 
     if ( gErgEcp.Lpc.buffer.has(_i_c) >= 0 )
     {
-      erg_ecp_log("lpc_cl_pc():already present [" + _i_c + "]");
+      erg_ecpl_lpc("erg_ecp_lpc__colors_list__prepend_color():already present [" + _i_c + "]");
       return;
     }
 
@@ -624,6 +658,7 @@ function erg_ecp_lpc__colors_list__prepend_color(_i_c)
 
 function erg_ecp_lpc__colors_list__reset()
 {
+  erg_ecpl_lpc("erg_ecp_lpc__colors_list__reset()");
   gErgEcp.Lpc.buffer.reset();
   erg_ecp_lpc__update_xul_grid();
 
@@ -639,7 +674,7 @@ function erg_ecp_lpc__cbk_changed(_i_evt)
 
   if ( v.localeCompare("#RESET") == 0 )
   {
-    erg_ecp_log("--- RESET ---")
+    erg_ecpl_lpc("--- RESET ---")
     erg_ecp_lpc__colors_list__reset();
     return;
   }
@@ -679,7 +714,6 @@ var NoDefault = false;
 var gColorObj;
 
 var gErgEcp;
-
 var gErgWidgets;
 
 const   eErgEcpColorValidity =
@@ -698,8 +732,10 @@ Object.freeze(eErgEcpColorValidity)
 document.addEventListener("dialogaccept", onAccept);
 document.addEventListener("dialogcancel", onCancelColor);
 
-function Startup() {
-  if (!window.arguments[1]) {
+function Startup()
+{
+  if (!window.arguments[1])
+  {
     dump("EdColorPicker: Missing color object param\n");
     return;
   }
@@ -718,7 +754,9 @@ function Startup() {
   //  ..............................................................................................
   gErgEcp                           =   new Object();
 
-    gErgEcp.log                     =   true;
+  gErgEcp.Log                       =   new Object();
+  erg_ecpl_set_all(true);                                                                           //  enable all logs...
+    gErgEcp.Log.xug                 = false;                                                        //  ...except XUL grid
 
     gErgEcp.Lpc                     =   new Object();
 
@@ -776,6 +814,8 @@ function Startup() {
       }
     }
   }
+
+  erg_ecpl_ctp("Startup():ColorType[" + ColorType + "]");
 
   var tmpColor;
   var haveTableRadio = false;
@@ -842,7 +882,7 @@ function Startup() {
       break;
   }
 
-  erg_ecp_log("Startup():ColorType[" + ColorType + "] TextType[" + TextType + "]")
+  erg_ecpl_ctp("Startup():TextType[" + TextType + "]")
 
   // Set initial color in input field and in the colorpicker
   gErgEcp.DefCol.passed_in  = gColor;
@@ -875,12 +915,12 @@ function Startup() {
     }
     LastPickedColor = gColorObj.LastBackgroundColor;
   }
-  erg_ecp_log("Startup():LastPickedColor[" + LastPickedColor + "]")
+  erg_ecpl_lpc("Startup():LastPickedColor[" + LastPickedColor + "]")
   //  ..............................................................................................
   //  set the widgets color according to the LastPickedColor
   if ( ! LastPickedColor )
   {
-    erg_ecp_log("Startup():!LastPickedColor");
+    erg_ecpl_lpc("Startup():! LastPickedColor");
     gErgEcp.Widgets.Lpc.btn.style.setProperty("background-color", "inherit");
     gErgEcp.Widgets.Lpc.btn.setAttribute("erg_ecp_VDOM_lpc__btn_bg_col_hex", "");
     // Hide the button, as there is no last color available.
