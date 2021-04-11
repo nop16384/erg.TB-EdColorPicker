@@ -444,7 +444,7 @@ function onCancelColor()
 
 function onDefault()
 {
-  erg_ecp_cur__set(gErgEcp.DefCol.passed_in);
+  erg_ecp_cur__set("");
   gErgEcp.Widgets.Input.txt.focus();
   //SetDefaultToOk();
 }
