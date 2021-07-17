@@ -103,6 +103,24 @@ function ErgEcpLpcBuffer(_i_str, _i_max_card)
     this.d_array[0] = _i_str;
   }
   //  ==============================================================================================
+  this.del=function(_i_ix)
+  {
+    var l, i;
+    //  ............................................................................................
+    l = this.d_array.length;
+
+    if ( ( _i_ix < 0 ) || ( _i_ix >= l ) )
+      return;
+
+    for ( i = _i_ix ; i <= ( l - 2 ) ; i++ )
+    {
+      this.d_array[i] = this.d_array[i+1];
+    }
+
+    if ( l > 0 )
+      this.d_array[l - 1] = "#cccccc";
+  }
+  //  ==============================================================================================
   this.get=function(_i_i)
   {
     //  ............................................................................................
@@ -217,7 +235,7 @@ function erg_ecp_util__set_window_location()
     var py = window.opener.screenY;
 
     var ox = gLocation.getAttribute("offsetX");
-    var oy = gLocation.getAttribute("offsetY")
+    var oy = gLocation.getAttribute("offsetY");
 
     var aw = screen.availWidth;
     var ah = screen.availHeight;
@@ -571,8 +589,6 @@ function erg_ecp_inp__cbk_input()
     erg_ecp_cur__set(erg_ecp_util__get_color_hex_from_css(gErgEcp.Widgets.Input.txt.value));        //  css -> hex
     return;
   }
-
-  erg_ecpl_inp("erg_LPC_inp_cbk_select():s[" + s + "]");
 }
 //  ################################################################################################
 //                    Last Picked Colors
@@ -638,6 +654,11 @@ function erg_ecp_lpc__colors_list__save_to_DOM()
 
 function erg_ecp_lpc__colors_list__prepend_color(_i_c)
 {
+    //  in this method we dont call update_xul_grid() but maybe we should ??                        //  _ERG_TODO_
+    //  because actually the dialog is closed just after the call, because a color has been choosen;
+    //  so the grid will be reconstructed at the next color change.
+    //  But in the future this method could be called in other circumstances
+    //  ............................................................................................
     var s;
     var a1, l1;
     var a2;
@@ -669,23 +690,46 @@ function erg_ecp_lpc__colors_list__reset()
 function erg_ecp_lpc__cbk_changed(_i_evt)
 {
   var v;
+  var ak;
+  var rr, rc, rx;
+  //var active = _i_evt.getModifierState("Alt");
+  //erg_ecpl_lpc("ACTIVE:" + active);
   //  ..............................................................................................
-  v = _i_evt.target.value;
-
+  v   = _i_evt.target.value;
+  ak  = _i_evt.altKey;
+  //  ..............................................................................................
+  //  reset all colors
   if ( v.localeCompare("#RESET") == 0 )
   {
-    erg_ecpl_lpc("--- RESET ---")
+    erg_ecpl_lpc("cbk_changed():reset colors")
     erg_ecp_lpc__colors_list__reset();
     return;
   }
+  //  ..............................................................................................
+  //  select a color
+  if ( ! ak )
+  {
+    erg_ecpl_lpc("cbk_changed():select color")
+    gErgEcp.Widgets.Lpc.btn.style.setProperty("background-color", v);
+    gErgEcp.Widgets.Lpc.btn.setAttribute("erg_ecp_VDOM_lpc__btn_bg_col_hex", v);
 
-  gErgEcp.Widgets.Lpc.btn.style.setProperty("background-color", v);
-  gErgEcp.Widgets.Lpc.btn.setAttribute("erg_ecp_VDOM_lpc__btn_bg_col_hex", v);
+    gErgEcp.Widgets.Lpc.mnl.setAttribute("label", "Last-picked colors");
 
-  gErgEcp.Widgets.Lpc.mnl.setAttribute("label", "Last-picked colors");
+    //  change the global selected color, avoiding the user having to click the button
+    erg_ecp_cur__set(v);                                                            //  hex color
 
-  //  change the global selected color, avoiding the user having to click the button
-  erg_ecp_cur__set(v);                                                            //  hex color
+    return;
+  }
+  //  ..............................................................................................
+  //  remove a color
+  rr  = _i_evt.target.getAttribute("idr");
+  rc  = _i_evt.target.getAttribute("idc");
+  rx  = parseInt(rr,10) * 4 + parseInt(rc,10);
+
+  erg_ecpl_lpc("cbk_changed():remove color:row["  + rr + "] col[" + rc + "] ix[" + rx + "]");
+
+  gErgEcp.Lpc.buffer.del(rx);
+  erg_ecp_lpc__update_xul_grid();                                                                   //  mandatory
 }
 
 function erg_ecp_lpc__cbk_clicked()
@@ -781,6 +825,7 @@ function Startup()
   gErgEcp.Widgets.Input.btn         =   document.getElementById("erg_ecp_EDOM_inp__btn");
   gErgEcp.Widgets.Input.txt         =   document.getElementById("erg_ecp_EDOM_inp__txt");
 
+  gErgEcp.Lpc.alt_key_pressed       =   false;
   gErgEcp.Lpc.grid_rows_card        =   gErgEcp.Widgets.Lpc.grid_rows.childElementCount;
   gErgEcp.Lpc.card                  =   gErgEcp.Lpc.grid_rows_card * 4;
   erg_ecp_lpc__colors_list__load_from_DOM();

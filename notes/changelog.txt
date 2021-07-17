@@ -40,4 +40,9 @@ v-005
 
 [29.03.21]  buffer : get() and set() methods added
 
-[29.04.02]  corrected bug in onDefault() that did not return the default color.
+[29.04.21]  corrected bug in onDefault() that did not return the default color.
+====================================================================================================
+v-007
+====================================================================================================
+[16.07.21]  New feature : Ctrl + click deletes a color from last picked colors, so you can keep
+  only the colors you want
