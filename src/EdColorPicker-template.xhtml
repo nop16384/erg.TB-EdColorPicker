@@ -31,32 +31,36 @@
   </radiogroup>
   </hbox>
 
-  <!-- #########################################################################################
-       GRID
-       ######################################################################################### -->
-  <grid flex="1">
-    <columns>
-      <column flex="2"/>
-      <column flex="1"/>
-    </columns>
-    <rows>
-      <row>
+  <hbox>                                                                                            <!-- 1 +HBOX            -->
 
-        <!-- ###################################################################################
+    <vbox>                                                                                          <!-- 2   +VBOX          -->
+
+        <!-- ===================================================================================
              COLOR PICKER
-             ################################################################################### -->
+             =================================================================================== -->
         <hbox>
 
           <html:input type="color" id="ColorPicker"
             ondblclick="if (onAccept()) { window.close(); }"
             onkeypress="erg_ecp_cpk__cbk_keypress(event);"
             onchange="erg_ecp_cpk__cbk_changed();"/>
+
+        </hbox>
+        <!-- ===================================================================================
+             DEFAULT BUTTON
+             =================================================================================== -->
+        <hbox>
+          <button id="DefaultColorButton" label="&default.label;" accesskey="&default.accessKey;" oncommand="onDefault()"/>
         </hbox>
 
-        <!-- ###################################################################################
+    </vbox>                                                                                         <!-- 2   -VBOX          -->
+
+    <vbox>                                                                                          <!-- 2   +VBOX          -->
+
+        <!-- ===================================================================================
              LAST PICKED COLORS
-             ################################################################################### -->
-        <hbox>
+             =================================================================================== -->
+        <hbox>                                                                                      <!-- 3     +HBOX        -->
 
           <menulist
             id="erg_ecp_EDOM_lpc__mnl"
@@ -68,60 +72,54 @@
             persist="erg_ecp_VDOM_lpc__picked_colors">
 
             <menupopup
-              style="min-width:10px; width:130px; max-height:152px; overflow:scroll;">
+              style="min-width:10px; width:132px; max-height:152px; overflow:scroll;">
 
-              <grid id="erg_ecp_EDOM_lpc__grid">
+              <!-- border:1px solid black; -->
 
-                <columns>
-                <column style="padding:2px;"/>
-                <column style="padding:2px;"/>
-                <column style="padding:2px;"/>
-                <column style="padding:2px;"/>
-                </columns>
+              <vbox id="erg_ecp_EDOM_lpc__vbox_mp">                                                 <!-- MENUPOPUP 1 +VBOX  -->
 
-                <rows id="erg_ecp_EDOM_lpc__grid_rows">
-                  <row style="padding:2px;">
-                    <menuitem idr="0" idc="0" label="xxx" value="#da504d" style="background-color:#da504d; min-width:10px; width:25px;"/>
-                    <menuitem idr="0" idc="1" label="xxx" value="#ffa500" style="background-color:#ffa500; min-width:10px; width:25px;"/>
-                    <menuitem idr="0" idc="2" label="xxx" value="#ffc0cb" style="background-color:#ffc0cb; min-width:10px; width:25px;"/>
-                    <menuitem idr="0" idc="3" label="xxx" value="#90ee90" style="background-color:#90ee90; min-width:10px; width:25px;"/>
-                  </row>
-                  <row style="padding:2px;">
-                    <menuitem idr="1" idc="0" label="xxx" value="#da504d" style="background-color:#da504d; min-width:10px; width:25px;"/>
-                    <menuitem idr="1" idc="1" label="xxx" value="#ffa500" style="background-color:#ffa500; min-width:10px; width:25px;"/>
-                    <menuitem idr="1" idc="2" label="xxx" value="#ffc0cb" style="background-color:#ffc0cb; min-width:10px; width:25px;"/>
-                    <menuitem idr="1" idc="3" label="xxx" value="#90ee90" style="background-color:#90ee90; min-width:10px; width:25px;"/>
-                  </row>
-                  <row style="padding:2px;">
-                    <menuitem idr="2" idc="0" label="xxx" value="#da504d" style="background-color:#da504d; min-width:10px; width:25px;"/>
-                    <menuitem idr="2" idc="1" label="xxx" value="#ffa500" style="background-color:#ffa500; min-width:10px; width:25px;"/>
-                    <menuitem idr="2" idc="2" label="xxx" value="#ffc0cb" style="background-color:#ffc0cb; min-width:10px; width:25px;"/>
-                    <menuitem idr="2" idc="3" label="xxx" value="#90ee90" style="background-color:#90ee90; min-width:10px; width:25px;"/>
-                  </row>
-                  <row style="padding:2px;">
-                    <menuitem idr="3" idc="0" label="xxx" value="#da504d" style="background-color:#da504d; min-width:10px; width:25px;"/>
-                    <menuitem idr="3" idc="1" label="xxx" value="#ffa500" style="background-color:#ffa500; min-width:10px; width:25px;"/>
-                    <menuitem idr="3" idc="2" label="xxx" value="#ffc0cb" style="background-color:#ffc0cb; min-width:10px; width:25px;"/>
-                    <menuitem idr="3" idc="3" label="xxx" value="#90ee90" style="background-color:#90ee90; min-width:10px; width:25px;"/>
-                  </row>
-                  <row style="padding:2px;">
-                    <menuitem idr="4" idc="0" label="xxx" value="#da504d" style="background-color:#da504d; min-width:10px; width:25px;"/>
-                    <menuitem idr="4" idc="1" label="xxx" value="#ffa500" style="background-color:#ffa500; min-width:10px; width:25px;"/>
-                    <menuitem idr="4" idc="2" label="xxx" value="#ffc0cb" style="background-color:#ffc0cb; min-width:10px; width:25px;"/>
-                    <menuitem idr="4" idc="3" label="xxx" value="#90ee90" style="background-color:#90ee90; min-width:10px; width:25px;"/>
-                  </row>
-                  <row style="padding:2px;">
-                    <menuitem idr="5" idc="0" label="xxx" value="#da504d" style="background-color:#da504d; min-width:10px; width:25px;"/>
-                    <menuitem idr="5" idc="1" label="xxx" value="#ffa500" style="background-color:#ffa500; min-width:10px; width:25px;"/>
-                    <menuitem idr="5" idc="2" label="xxx" value="#ffc0cb" style="background-color:#ffc0cb; min-width:10px; width:25px;"/>
-                    <menuitem idr="5" idc="3" label="xxx" value="#90ee90" style="background-color:#90ee90; min-width:10px; width:25px;"/>
-                  </row>
-                </rows>
-              </grid>
+                  <hbox>
+                    <box style="padding:2px;"> <menuitem idr="0" idc="0" label="" value="#da504d" style="background-color:#da504d; min-width:10px; max-width:25px; "/></box>
+                    <box style="padding:2px;"> <menuitem idr="0" idc="1" label="" value="#ffa500" style="background-color:#ffa500; min-width:10px; max-width:25px; "/></box>
+                    <box style="padding:2px;"> <menuitem idr="0" idc="2" label="" value="#ffc0cb" style="background-color:#ffc0cb; min-width:10px; max-width:25px; "/></box>
+                    <box style="padding:2px;"> <menuitem idr="0" idc="3" label="" value="#90ee90" style="background-color:#90ee90; min-width:10px; max-width:25px; "/></box>
+                  </hbox>
+                  <hbox>
+                    <box style="padding:2px;"> <menuitem idr="1" idc="0" label="" value="#90ee90" style="background-color:#90ee90; min-width:10px; max-width:25px; "/></box>
+                    <box style="padding:2px;"> <menuitem idr="1" idc="1" label="" value="#da504d" style="background-color:#da504d; min-width:10px; max-width:25px; "/></box>
+                    <box style="padding:2px;"> <menuitem idr="1" idc="2" label="" value="#ffa500" style="background-color:#ffa500; min-width:10px; max-width:25px; "/></box>
+                    <box style="padding:2px;"> <menuitem idr="1" idc="3" label="" value="#ffc0cb" style="background-color:#ffc0cb; min-width:10px; max-width:25px; "/></box>
+                  </hbox>
+                  <hbox>
+                    <box style="padding:2px"> <menuitem idr="2" idc="0" label="" value="#da504d" style="background-color:#da504d; min-width:10px; max-width:25px;"/></box>
+                    <box style="padding:2px"> <menuitem idr="2" idc="1" label="" value="#ffa500" style="background-color:#ffa500; min-width:10px; max-width:25px;"/></box>
+                    <box style="padding:2px"> <menuitem idr="2" idc="2" label="" value="#ffc0cb" style="background-color:#ffc0cb; min-width:10px; max-width:25px;"/></box>
+                    <box style="padding:2px"> <menuitem idr="2" idc="3" label="" value="#90ee90" style="background-color:#90ee90; min-width:10px; max-width:25px;"/></box>
+                  </hbox>
+                  <hbox>
+                    <box style="padding:2px"> <menuitem idr="3" idc="0" label="" value="#da504d" style="background-color:#da504d; min-width:10px; max-width:25px;"/></box>
+                    <box style="padding:2px"> <menuitem idr="3" idc="1" label="" value="#ffa500" style="background-color:#ffa500; min-width:10px; max-width:25px;"/></box>
+                    <box style="padding:2px"> <menuitem idr="3" idc="2" label="" value="#ffc0cb" style="background-color:#ffc0cb; min-width:10px; max-width:25px;"/></box>
+                    <box style="padding:2px"> <menuitem idr="3" idc="3" label="" value="#90ee90" style="background-color:#90ee90; min-width:10px; max-width:25px;"/></box>
+                  </hbox>
+                  <hbox>
+                    <box style="padding:2px"> <menuitem idr="4" idc="0" label="" value="#da504d" style="background-color:#da504d; min-width:10px; max-width:25px;"/></box>
+                    <box style="padding:2px"> <menuitem idr="4" idc="1" label="" value="#ffa500" style="background-color:#ffa500; min-width:10px; max-width:25px;"/></box>
+                    <box style="padding:2px"> <menuitem idr="4" idc="2" label="" value="#ffc0cb" style="background-color:#ffc0cb; min-width:10px; max-width:25px;"/></box>
+                    <box style="padding:2px"> <menuitem idr="4" idc="3" label="" value="#90ee90" style="background-color:#90ee90; min-width:10px; max-width:25px;"/></box>
+                  </hbox>
+                  <hbox>
+                    <box style="padding:2px"> <menuitem idr="5" idc="0" label="" value="#da504d" style="background-color:#da504d; min-width:10px; max-width:25px;"/></box>
+                    <box style="padding:2px"> <menuitem idr="5" idc="1" label="" value="#ffa500" style="background-color:#ffa500; min-width:10px; max-width:25px;"/></box>
+                    <box style="padding:2px"> <menuitem idr="5" idc="2" label="" value="#ffc0cb" style="background-color:#ffc0cb; min-width:10px; max-width:25px;"/></box>
+                    <box style="padding:2px"> <menuitem idr="5" idc="3" label="" value="#90ee90" style="background-color:#90ee90; min-width:10px; max-width:25px;"/></box>
+                  </hbox>
 
-              <box style="padding:2px;">
-                <menuitem label="Reset" value="#RESET" style="align:center; background-color:#cccccc; width:112px"/>
-              </box>
+                  <box style="padding:2px;">
+                    <menuitem label="Reset" value="#RESET" style="align:center; background-color:#cccccc; width:112px"/>
+                  </box>
+
+              </vbox>                                                                               <!-- MENUPOPUP 1 -VBOX  -->
 
             </menupopup>
 
@@ -143,23 +141,12 @@
             </button>
           </vbox>
 
-        </hbox>
+        </hbox>                                                                                     <!-- 3     -HBOX        -->
 
-      </row>
-
-      <row>
-
-        <!-- ###################################################################################
-             DEFAULT BUTTON
-             ################################################################################### -->
-        <hbox>
-          <button id="DefaultColorButton" label="&default.label;" accesskey="&default.accessKey;" oncommand="onDefault()"/>
-        </hbox>
-
-        <!-- ###################################################################################
+        <!-- ===================================================================================
              CSS COLORS
-             ################################################################################### -->
-        <hbox>
+             =================================================================================== -->
+        <hbox>                                                                                      <!-- 3     +HBOX        -->
 
           <menulist
             id="erg_ecp_EDOM_css__mnl"
@@ -185,14 +172,14 @@ __ERG_MARK__CSS_COLORS_XHTML_01__
             </button>
           </vbox>
 
-        </hbox>
+        </hbox>                                                                                     <!-- 3     -HBOX        -->
 
-      </row>
-    </rows>
-  </grid>
-  <!-- #########################################################################################
+    </vbox>                                                                                         <!-- 2   -VBOX          -->
+
+  </hbox>                                                                                           <!-- 1 -HBOX            -->
+  <!-- =========================================================================================
        COLOR INPUT
-       ######################################################################################### -->
+       ========================================================================================= -->
   <separator class="groove"/>
 
   <hbox align="center" flex="1">

@@ -353,6 +353,29 @@ function erg_ecp_util__get_color_hex_from_css(_i_css)
   }
   return "";
 }
+//  ************************************************************************************************
+function erg_ecp_util__rget_all_menuitems(_i_node)
+{
+  //erg_ecpl_lpc( "nodeName:" + _i_node.nodeName );
+
+  if ( _i_node.nodeName == "menuitem" )
+  {
+    if ( _i_node.value != "#RESET" )
+    {
+      gErgEcp.Widgets.Lpc.mitems.push(_i_node);
+      return;
+    }
+  }
+
+  for ( var i = 0; i < _i_node.childNodes.length; i++ )
+  {
+    var child = _i_node.childNodes[i];
+
+    erg_ecp_util__rget_all_menuitems(child);
+  }
+
+  return;
+}
 //  ################################################################################################
 //                    Currently selected color
 //  ################################################################################################
@@ -595,41 +618,27 @@ function erg_ecp_inp__cbk_input()
 //  ################################################################################################
 function erg_ecp_lpc__update_xul_grid()
 {
-    var i, j, k;
-    var c;
-    var row, mi;
-    //  ............................................................................................
-    erg_ecpl_xug("erg_LPC_lpc_uxg():grid [" + gErgEcp.Widgets.Lpc.grid + "]");
-    erg_ecpl_xug("erg_LPC_lpc_uxg():rows [" + gErgEcp.Widgets.Lpc.grid_rows + "]");
-    erg_ecpl_xug("erg_LPC_lpc_uxg():#rows[" + gErgEcp.Widgets.Lpc.grid_rows.childNodes.length + "]");
+  var i;
+  var c;
+  var mi;
+  //  ............................................................................................
+  for ( i = 0; i < gErgEcp.Lpc.card ; i++ )
+  {
+    mi  = gErgEcp.Widgets.Lpc.mitems[i];
 
-    for ( i = 0; i < gErgEcp.Lpc.grid_rows_card ; i++ )
+    // there is a range check in the get() method, so we can call directly
+    c = gErgEcp.Lpc.buffer.get(i);
+
+    if ( c == null )
     {
-        row = gErgEcp.Widgets.Lpc.grid_rows.childNodes[i];
+        c = "#cccccc";
+    }
 
-        for ( j = 0; j < 4 ; j++ )
-        {
-            mi = row.childNodes[j];
+    mi.style.setProperty("background-color", c);
+    mi.value = c;
 
-            //erg_ecpl_xug("erg_LPC_update_last_picked_colors():row [" + row + "]");
-            //erg_ecpl_xug("erg_LPC_update_last_picked_colors(): mi [" + mi  + "]");
-
-            k = i * 4 + j;
-
-            // there is a range check in the get() method, so we can call directly
-            c = gErgEcp.Lpc.buffer.get(k);
-
-            if ( c == null )
-            {
-                c = "#cccccc";
-            }
-
-            mi.style.setProperty("background-color", c);
-            mi.value = c;
-
-            erg_ecpl_xug("erg_LPC_lpc_uxg():[" + i + "][" + j + "]=[" + c + "]");
-        }
-     }
+    erg_ecpl_xug("erg_LPC_lpc_uxg():[" + i + "]=[" + c + "]");
+  }
 }
 
 function erg_ecp_lpc__colors_list__load_from_DOM()
@@ -800,7 +809,7 @@ function Startup()
 
   gErgEcp.Log                       =   new Object();
   erg_ecpl_set_all(true);                                                                           //  enable all logs...
-    gErgEcp.Log.xug                 = false;                                                        //  ...except XUL grid
+    //gErgEcp.Log.xug                 = false;                                                        //  ...except XUL grid
 
     gErgEcp.Lpc                     =   new Object();
 
@@ -818,16 +827,21 @@ function Startup()
   gErgEcp.Widgets.Lpc.vbox          =   document.getElementById("erg_ecp_EDOM_lpc__vbox");
   gErgEcp.Widgets.Lpc.btn           =   document.getElementById("erg_ecp_EDOM_lpc__btn");
   gErgEcp.Widgets.Lpc.mnl           =   document.getElementById("erg_ecp_EDOM_lpc__mnl");
-  gErgEcp.Widgets.Lpc.grid          =   document.getElementById("erg_ecp_EDOM_lpc__grid");
-  gErgEcp.Widgets.Lpc.grid_rows     =   document.getElementById("erg_ecp_EDOM_lpc__grid_rows");
+
+  gErgEcp.Widgets.Lpc.vbox_mp       =   document.getElementById("erg_ecp_EDOM_lpc__vbox_mp");
+  gErgEcp.Widgets.Lpc.mitems        =   new Array();
+
   gErgEcp.Widgets.Css.mnl           =   document.getElementById("erg_ecp_EDOM_css__mnl");
   gErgEcp.Widgets.Css.btn           =   document.getElementById("erg_ecp_EDOM_css__btn");
   gErgEcp.Widgets.Input.btn         =   document.getElementById("erg_ecp_EDOM_inp__btn");
   gErgEcp.Widgets.Input.txt         =   document.getElementById("erg_ecp_EDOM_inp__txt");
 
   gErgEcp.Lpc.alt_key_pressed       =   false;
-  gErgEcp.Lpc.grid_rows_card        =   gErgEcp.Widgets.Lpc.grid_rows.childElementCount;
-  gErgEcp.Lpc.card                  =   gErgEcp.Lpc.grid_rows_card * 4;
+
+  erg_ecp_util__rget_all_menuitems(gErgEcp.Widgets.Lpc.vbox_mp);
+  gErgEcp.Lpc.card                  =   gErgEcp.Widgets.Lpc.mitems.length;
+  erg_ecpl_lpc("mitems card:" + gErgEcp.Lpc.card);
+
   erg_ecp_lpc__colors_list__load_from_DOM();
   gErgEcp.Lpc.buffer.dump();
 
