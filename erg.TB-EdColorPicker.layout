@@ -2,141 +2,9 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Export" />
-	<File name="res/css-colors--generate.bash" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src/buffer/buffer.js" open="1" top="0" tabpos="18" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1198" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="notes/bugs.txt" open="1" top="0" tabpos="19" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1048" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="../../../../sys/usr/local/Thunderbird/omni-78.8.1/chrome/messenger/content/messenger/messengercompose/EdColorPicker.js" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="23432" topLine="0" />
-		</Cursor>
-		<Folding>
-			<Collapse line="203" />
-			<Collapse line="257" />
-			<Collapse line="263" />
-			<Collapse line="264" />
-			<Collapse line="276" />
-			<Collapse line="279" />
-			<Collapse line="284" />
-			<Collapse line="289" />
-			<Collapse line="297" />
-			<Collapse line="309" />
-			<Collapse line="317" />
-			<Collapse line="328" />
-			<Collapse line="329" />
-			<Collapse line="339" />
-			<Collapse line="352" />
-			<Collapse line="376" />
-			<Collapse line="400" />
-			<Collapse line="406" />
-			<Collapse line="413" />
-			<Collapse line="415" />
-			<Collapse line="426" />
-			<Collapse line="427" />
-			<Collapse line="434" />
-			<Collapse line="440" />
-			<Collapse line="447" />
-			<Collapse line="482" />
-			<Collapse line="484" />
-			<Collapse line="527" />
-			<Collapse line="543" />
-			<Collapse line="554" />
-			<Collapse line="566" />
-			<Collapse line="572" />
-			<Collapse line="579" />
-			<Collapse line="588" />
-			<Collapse line="599" />
-			<Collapse line="618" />
-			<Collapse line="620" />
-			<Collapse line="628" />
-			<Collapse line="631" />
-			<Collapse line="635" />
-			<Collapse line="640" />
-			<Collapse line="650" />
-			<Collapse line="658" />
-			<Collapse line="674" />
-			<Collapse line="692" />
-			<Collapse line="696" />
-			<Collapse line="705" />
-			<Collapse line="709" />
-			<Collapse line="731" />
-			<Collapse line="735" />
-			<Collapse line="742" />
-			<Collapse line="755" />
-			<Collapse line="766" />
-		</Folding>
-	</File>
-	<File name="res/css-colors-147-red--raw.txt" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="0" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="res/css-colors-147-yellow--raw.txt" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="0" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="res/css-colors-147-pink--raw.txt" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="0" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="notes/todo.txt" open="1" top="0" tabpos="20" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="479" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="res/css-colors-147-cyan--raw.txt" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="0" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="res/css-colors-147-brown--raw.txt" open="1" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="546" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="res/css-colors-147-purple--raw.txt" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="559" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="build/build.bash" open="1" top="0" tabpos="16" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1027" topLine="0" />
-		</Cursor>
-		<Folding>
-			<Collapse line="0" />
-			<Collapse line="21" />
-			<Collapse line="27" />
-			<Collapse line="33" />
-			<Collapse line="44" />
-		</Folding>
-	</File>
-	<File name="res/css-colors-147-white--raw.txt" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="0" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="../../../../sys/usr/local/Thunderbird/omni-78.8.1/chrome/messenger/content/messenger/messengercompose/EdColorPicker.xhtml" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2149" topLine="321" />
-		</Cursor>
-	</File>
-	<File name="res/css-colors-147-green--raw.txt" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="0" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="res/css-colors-147--raw.txt" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1913" topLine="86" />
+			<Cursor1 position="4402" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="res/css-colors-147-blue--raw.txt" open="1" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -144,29 +12,21 @@
 			<Cursor1 position="14" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="notes/changelog.txt" open="1" top="1" tabpos="17" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="build/build.bash" open="1" top="0" tabpos="16" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2635" topLine="0" />
+			<Cursor1 position="2146" topLine="10" />
 		</Cursor>
-	</File>
-	<File name="src/EdColorPicker-template.xhtml" open="1" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3826" topLine="52" />
-		</Cursor>
-	</File>
-	<File name="res/css-colors-147-grey--raw.txt" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="556" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="res/css-colors-147-orange--raw.txt" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="0" topLine="0" />
-		</Cursor>
+		<Folding>
+			<Collapse line="0" />
+			<Collapse line="34" />
+			<Collapse line="40" />
+			<Collapse line="46" />
+			<Collapse line="78" />
+		</Folding>
 	</File>
 	<File name="src/EdColorPicker-template.js" open="1" top="0" tabpos="15" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="18626" topLine="0" />
+			<Cursor1 position="24034" topLine="107" />
 		</Cursor>
 		<Folding>
 			<Collapse line="0" />
@@ -254,6 +114,7 @@
 			<Collapse line="563" />
 			<Collapse line="570" />
 			<Collapse line="772" />
+			<Collapse line="788" />
 			<Collapse line="790" />
 			<Collapse line="857" />
 			<Collapse line="864" />
@@ -280,9 +141,154 @@
 			<Collapse line="1031" />
 		</Folding>
 	</File>
-	<File name="src/buffer/buffer.js" open="1" top="0" tabpos="18" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="res/css-colors-147-cyan--raw.txt" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="4402" topLine="0" />
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="notes/todo.txt" open="1" top="0" tabpos="20" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="479" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="res/css-colors-147-purple--raw.txt" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="559" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="res/css-colors--generate.bash" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1198" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="notes/changelog.txt" open="1" top="0" tabpos="17" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2700" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="notes/version-current.txt" open="1" top="1" tabpos="20" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="19" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../../../../sys/usr/local/Thunderbird/omni-78.8.1/chrome/messenger/content/messenger/messengercompose/EdColorPicker.xhtml" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2149" topLine="321" />
+		</Cursor>
+	</File>
+	<File name="res/css-colors-147-pink--raw.txt" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src/EdColorPicker-template.xhtml" open="1" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1752" topLine="181" />
+		</Cursor>
+	</File>
+	<File name="res/css-colors-147-grey--raw.txt" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="556" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../../../../sys/usr/local/Thunderbird/omni-78.8.1/chrome/messenger/content/messenger/messengercompose/EdColorPicker.js" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="23432" topLine="0" />
+		</Cursor>
+		<Folding>
+			<Collapse line="203" />
+			<Collapse line="257" />
+			<Collapse line="263" />
+			<Collapse line="264" />
+			<Collapse line="276" />
+			<Collapse line="279" />
+			<Collapse line="284" />
+			<Collapse line="289" />
+			<Collapse line="297" />
+			<Collapse line="309" />
+			<Collapse line="317" />
+			<Collapse line="328" />
+			<Collapse line="329" />
+			<Collapse line="339" />
+			<Collapse line="352" />
+			<Collapse line="376" />
+			<Collapse line="400" />
+			<Collapse line="406" />
+			<Collapse line="413" />
+			<Collapse line="415" />
+			<Collapse line="426" />
+			<Collapse line="427" />
+			<Collapse line="434" />
+			<Collapse line="440" />
+			<Collapse line="447" />
+			<Collapse line="482" />
+			<Collapse line="484" />
+			<Collapse line="527" />
+			<Collapse line="543" />
+			<Collapse line="554" />
+			<Collapse line="566" />
+			<Collapse line="572" />
+			<Collapse line="579" />
+			<Collapse line="588" />
+			<Collapse line="599" />
+			<Collapse line="618" />
+			<Collapse line="620" />
+			<Collapse line="628" />
+			<Collapse line="631" />
+			<Collapse line="635" />
+			<Collapse line="640" />
+			<Collapse line="650" />
+			<Collapse line="658" />
+			<Collapse line="674" />
+			<Collapse line="692" />
+			<Collapse line="696" />
+			<Collapse line="705" />
+			<Collapse line="709" />
+			<Collapse line="731" />
+			<Collapse line="735" />
+			<Collapse line="742" />
+			<Collapse line="755" />
+			<Collapse line="766" />
+		</Folding>
+	</File>
+	<File name="res/css-colors-147-green--raw.txt" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="res/css-colors-147-yellow--raw.txt" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="res/css-colors-147-white--raw.txt" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="notes/bugs.txt" open="1" top="0" tabpos="19" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1048" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="res/css-colors-147-red--raw.txt" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="res/css-colors-147--raw.txt" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1913" topLine="86" />
+		</Cursor>
+	</File>
+	<File name="res/css-colors-147-orange--raw.txt" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="res/css-colors-147-brown--raw.txt" open="1" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="546" topLine="0" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

@@ -71,6 +71,9 @@
 		<Unit filename="notes/todo.txt">
 			<Option virtualFolder="notes/" />
 		</Unit>
+		<Unit filename="notes/version-current.txt">
+			<Option virtualFolder="notes/" />
+		</Unit>
 		<Unit filename="res/css-colors--generate.bash">
 			<Option virtualFolder="res/" />
 		</Unit>

@@ -21,6 +21,26 @@
   <script src="chrome://messenger/content/messengercompose/EdColorPicker.js"/>
   <script src="chrome://messenger/content/dialogShadowDom.js"/>
 
+  <popupset>
+    <tooltip id="tip_rst" orient="vertical" style="background-color: #33DD00;">
+      <description value="Reset all colors"/>
+      <!--<description value="Really!" style="color: red;"/>-->
+    </tooltip>
+  </popupset>
+
+  <popupset>
+    <tooltip id="tip_hlp" orient="vertical" style="background-color: #33DD00;">
+      <description value="Alt + RightClick deletes a color"/>
+    </tooltip>
+  </popupset>
+
+  <popupset>
+    <tooltip id="tip_abt" orient="vertical" style="background-color: #33DD00;">
+      <description value="Version : TB-91.03.02--V-010"/>
+      <description value="https://github.com/earlgrey-bis/erg.TB-EdColorPicker"/>
+    </tooltip>
+  </popupset>
+
   <spacer id="location" offsetX="50" offsetY="50" persist="offsetX offsetY"/>
 
   <hbox id="TableOrCellGroup" align="center" collapsed="true">
@@ -55,6 +75,13 @@
 
     </vbox>                                                                                         <!-- 2   -VBOX          -->
 
+        <!-- ===================================================================================
+             SPACER VBOX
+             =================================================================================== -->
+    <vbox flex="2">                                                                                 <!-- 2   +VBOX          -->
+    </vbox>                                                                                         <!-- 2   -VBOX          -->
+
+
     <vbox>                                                                                          <!-- 2   +VBOX          -->
 
         <!-- ===================================================================================
@@ -72,52 +99,62 @@
             persist="erg_ecp_VDOM_lpc__picked_colors">
 
             <menupopup
-              style="min-width:10px; width:132px; max-height:152px; overflow:scroll;">
+              style="overflow:scroll; __ERG_MARK__LPC_CSS_POP_SIZE_XHTML__">
 
               <!-- border:1px solid black; -->
 
               <vbox id="erg_ecp_EDOM_lpc__vbox_mp">                                                 <!-- MENUPOPUP 1 +VBOX  -->
 
                   <hbox>
-                    <box style="padding:2px;"> <menuitem idr="0" idc="0" label="" value="#da504d" style="background-color:#da504d; min-width:10px; max-width:25px; "/></box>
-                    <box style="padding:2px;"> <menuitem idr="0" idc="1" label="" value="#ffa500" style="background-color:#ffa500; min-width:10px; max-width:25px; "/></box>
-                    <box style="padding:2px;"> <menuitem idr="0" idc="2" label="" value="#ffc0cb" style="background-color:#ffc0cb; min-width:10px; max-width:25px; "/></box>
-                    <box style="padding:2px;"> <menuitem idr="0" idc="3" label="" value="#90ee90" style="background-color:#90ee90; min-width:10px; max-width:25px; "/></box>
+                    <box style="padding:2px;"> <menuitem idr="0" idc="0" label="" value="#da504d" style="background-color:#da504d; __ERG_MARK__LPC_CSS_BOX_SIZE_XHTML__ "/></box>
+                    <box style="padding:2px;"> <menuitem idr="0" idc="1" label="" value="#ffa500" style="background-color:#ffa500; __ERG_MARK__LPC_CSS_BOX_SIZE_XHTML__ "/></box>
+                    <box style="padding:2px;"> <menuitem idr="0" idc="2" label="" value="#ffc0cb" style="background-color:#ffc0cb; __ERG_MARK__LPC_CSS_BOX_SIZE_XHTML__ "/></box>
+                    <box style="padding:2px;"> <menuitem idr="0" idc="3" label="" value="#90ee90" style="background-color:#90ee90; __ERG_MARK__LPC_CSS_BOX_SIZE_XHTML__ "/></box>
+                    <box style="padding:2px;"> <menuitem idr="0" idc="4" label="" value="#889044" style="background-color:#90ee90; __ERG_MARK__LPC_CSS_BOX_SIZE_XHTML__ "/></box>
                   </hbox>
                   <hbox>
-                    <box style="padding:2px;"> <menuitem idr="1" idc="0" label="" value="#90ee90" style="background-color:#90ee90; min-width:10px; max-width:25px; "/></box>
-                    <box style="padding:2px;"> <menuitem idr="1" idc="1" label="" value="#da504d" style="background-color:#da504d; min-width:10px; max-width:25px; "/></box>
-                    <box style="padding:2px;"> <menuitem idr="1" idc="2" label="" value="#ffa500" style="background-color:#ffa500; min-width:10px; max-width:25px; "/></box>
-                    <box style="padding:2px;"> <menuitem idr="1" idc="3" label="" value="#ffc0cb" style="background-color:#ffc0cb; min-width:10px; max-width:25px; "/></box>
+                    <box style="padding:2px;"> <menuitem idr="1" idc="0" label="" value="#90ee90" style="background-color:#90ee90; __ERG_MARK__LPC_CSS_BOX_SIZE_XHTML__ "/></box>
+                    <box style="padding:2px;"> <menuitem idr="1" idc="1" label="" value="#da504d" style="background-color:#da504d; __ERG_MARK__LPC_CSS_BOX_SIZE_XHTML__ "/></box>
+                    <box style="padding:2px;"> <menuitem idr="1" idc="2" label="" value="#ffa500" style="background-color:#ffa500; __ERG_MARK__LPC_CSS_BOX_SIZE_XHTML__ "/></box>
+                    <box style="padding:2px;"> <menuitem idr="1" idc="3" label="" value="#ffc0cb" style="background-color:#ffc0cb; __ERG_MARK__LPC_CSS_BOX_SIZE_XHTML__ "/></box>
+                    <box style="padding:2px;"> <menuitem idr="1" idc="4" label="" value="#889044" style="background-color:#90ee90; __ERG_MARK__LPC_CSS_BOX_SIZE_XHTML__ "/></box>
                   </hbox>
                   <hbox>
-                    <box style="padding:2px"> <menuitem idr="2" idc="0" label="" value="#da504d" style="background-color:#da504d; min-width:10px; max-width:25px;"/></box>
-                    <box style="padding:2px"> <menuitem idr="2" idc="1" label="" value="#ffa500" style="background-color:#ffa500; min-width:10px; max-width:25px;"/></box>
-                    <box style="padding:2px"> <menuitem idr="2" idc="2" label="" value="#ffc0cb" style="background-color:#ffc0cb; min-width:10px; max-width:25px;"/></box>
-                    <box style="padding:2px"> <menuitem idr="2" idc="3" label="" value="#90ee90" style="background-color:#90ee90; min-width:10px; max-width:25px;"/></box>
+                    <box style="padding:2px;"> <menuitem idr="2" idc="0" label="" value="#da504d" style="background-color:#da504d; __ERG_MARK__LPC_CSS_BOX_SIZE_XHTML__"/></box>
+                    <box style="padding:2px;"> <menuitem idr="2" idc="1" label="" value="#ffa500" style="background-color:#ffa500; __ERG_MARK__LPC_CSS_BOX_SIZE_XHTML__"/></box>
+                    <box style="padding:2px;"> <menuitem idr="2" idc="2" label="" value="#ffc0cb" style="background-color:#ffc0cb; __ERG_MARK__LPC_CSS_BOX_SIZE_XHTML__"/></box>
+                    <box style="padding:2px;"> <menuitem idr="2" idc="3" label="" value="#90ee90" style="background-color:#90ee90; __ERG_MARK__LPC_CSS_BOX_SIZE_XHTML__"/></box>
+                    <box style="padding:2px;"> <menuitem idr="2" idc="4" label="" value="#889044" style="background-color:#90ee90; __ERG_MARK__LPC_CSS_BOX_SIZE_XHTML__ "/></box>
                   </hbox>
                   <hbox>
-                    <box style="padding:2px"> <menuitem idr="3" idc="0" label="" value="#da504d" style="background-color:#da504d; min-width:10px; max-width:25px;"/></box>
-                    <box style="padding:2px"> <menuitem idr="3" idc="1" label="" value="#ffa500" style="background-color:#ffa500; min-width:10px; max-width:25px;"/></box>
-                    <box style="padding:2px"> <menuitem idr="3" idc="2" label="" value="#ffc0cb" style="background-color:#ffc0cb; min-width:10px; max-width:25px;"/></box>
-                    <box style="padding:2px"> <menuitem idr="3" idc="3" label="" value="#90ee90" style="background-color:#90ee90; min-width:10px; max-width:25px;"/></box>
+                    <box style="padding:2px;"> <menuitem idr="3" idc="0" label="" value="#da504d" style="background-color:#da504d; __ERG_MARK__LPC_CSS_BOX_SIZE_XHTML__"/></box>
+                    <box style="padding:2px;"> <menuitem idr="3" idc="1" label="" value="#ffa500" style="background-color:#ffa500; __ERG_MARK__LPC_CSS_BOX_SIZE_XHTML__"/></box>
+                    <box style="padding:2px;"> <menuitem idr="3" idc="2" label="" value="#ffc0cb" style="background-color:#ffc0cb; __ERG_MARK__LPC_CSS_BOX_SIZE_XHTML__"/></box>
+                    <box style="padding:2px;"> <menuitem idr="3" idc="3" label="" value="#90ee90" style="background-color:#90ee90; __ERG_MARK__LPC_CSS_BOX_SIZE_XHTML__"/></box>
+                    <box style="padding:2px;"> <menuitem idr="3" idc="4" label="" value="#889044" style="background-color:#90ee90; __ERG_MARK__LPC_CSS_BOX_SIZE_XHTML__ "/></box>
                   </hbox>
                   <hbox>
-                    <box style="padding:2px"> <menuitem idr="4" idc="0" label="" value="#da504d" style="background-color:#da504d; min-width:10px; max-width:25px;"/></box>
-                    <box style="padding:2px"> <menuitem idr="4" idc="1" label="" value="#ffa500" style="background-color:#ffa500; min-width:10px; max-width:25px;"/></box>
-                    <box style="padding:2px"> <menuitem idr="4" idc="2" label="" value="#ffc0cb" style="background-color:#ffc0cb; min-width:10px; max-width:25px;"/></box>
-                    <box style="padding:2px"> <menuitem idr="4" idc="3" label="" value="#90ee90" style="background-color:#90ee90; min-width:10px; max-width:25px;"/></box>
-                  </hbox>
-                  <hbox>
-                    <box style="padding:2px"> <menuitem idr="5" idc="0" label="" value="#da504d" style="background-color:#da504d; min-width:10px; max-width:25px;"/></box>
-                    <box style="padding:2px"> <menuitem idr="5" idc="1" label="" value="#ffa500" style="background-color:#ffa500; min-width:10px; max-width:25px;"/></box>
-                    <box style="padding:2px"> <menuitem idr="5" idc="2" label="" value="#ffc0cb" style="background-color:#ffc0cb; min-width:10px; max-width:25px;"/></box>
-                    <box style="padding:2px"> <menuitem idr="5" idc="3" label="" value="#90ee90" style="background-color:#90ee90; min-width:10px; max-width:25px;"/></box>
+                    <box style="padding:2px;"> <menuitem idr="4" idc="0" label="" value="#da504d" style="background-color:#da504d; __ERG_MARK__LPC_CSS_BOX_SIZE_XHTML__"/></box>
+                    <box style="padding:2px;"> <menuitem idr="4" idc="1" label="" value="#ffa500" style="background-color:#ffa500; __ERG_MARK__LPC_CSS_BOX_SIZE_XHTML__"/></box>
+                    <box style="padding:2px;"> <menuitem idr="4" idc="2" label="" value="#ffc0cb" style="background-color:#ffc0cb; __ERG_MARK__LPC_CSS_BOX_SIZE_XHTML__"/></box>
+                    <box style="padding:2px;"> <menuitem idr="4" idc="3" label="" value="#90ee90" style="background-color:#90ee90; __ERG_MARK__LPC_CSS_BOX_SIZE_XHTML__"/></box>
+                    <box style="padding:2px;"> <menuitem idr="4" idc="4" label="" value="#889044" style="background-color:#90ee90; __ERG_MARK__LPC_CSS_BOX_SIZE_XHTML__ "/></box>
                   </hbox>
 
-                  <box style="padding:2px;">
-                    <menuitem label="Reset" value="#RESET" style="align:center; background-color:#cccccc; width:112px"/>
-                  </box>
+                  <!-- ========================== Reset button ================================= -->
+                  <hbox style="padding:2px; align:center;">
+                    <menuitem label="Reset all" value="#RESET" tooltip="tip_rst" style="align:right; background-color:#cccccc; __ERG_MARK__LPC_CSS_RST_SIZE_XHTML__"/>
+                  </hbox>
+
+                  <!-- ========================== Help  button ================================= -->
+                  <hbox style="padding:2px; align:center;">
+                    <menuitem label="Help" value="#HELP" tooltip="tip_hlp" style="align:right; background-color:#cccccc; __ERG_MARK__LPC_CSS_RST_SIZE_XHTML__"/>
+                  </hbox>
+
+                  <!-- ========================== About button ================================= -->
+                  <hbox style="padding:2px; align:center;">
+                    <menuitem label="About" value="#ABOUT" tooltip="tip_abt" style="align:right; background-color:#cccccc; __ERG_MARK__LPC_CSS_RST_SIZE_XHTML__"/>
+                  </hbox>
 
               </vbox>                                                                               <!-- MENUPOPUP 1 -VBOX  -->
 
@@ -129,7 +166,7 @@
 
           <vbox
             id="erg_ecp_EDOM_lpc__vbox"
-            style="padding-top:2px; min-width:10px;  width:30px; height:15px; border:none;"
+            style=" border:none; padding-top:2px; height:15px; min-width:10px; width:30px;"
             LastTextColor=""
             LastBackgroundColor=""
             persist="LastTextColor LastBackgroundColor">
