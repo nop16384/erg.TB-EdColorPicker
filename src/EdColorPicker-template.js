@@ -360,11 +360,14 @@ function erg_ecp_util__rget_all_menuitems(_i_node)
 
   if ( _i_node.nodeName == "menuitem" )
   {
-    if ( _i_node.value != "#RESET" )
+    if (  ( _i_node.value != "#RESET" )   &&
+          ( _i_node.value != "#HELP"  )   &&
+          ( _i_node.value != "#ABOUT" )   )
     {
       gErgEcp.Widgets.Lpc.mitems.push(_i_node);
-      return;
     }
+
+    return;
   }
 
   for ( var i = 0; i < _i_node.childNodes.length; i++ )
@@ -714,6 +717,12 @@ function erg_ecp_lpc__cbk_changed(_i_evt)
     erg_ecp_lpc__colors_list__reset();
     return;
   }
+  //  no action
+  if (  ( v.localeCompare("#HELP")  == 0 )    ||
+        ( v.localeCompare("#ABOUT") == 0 )    )
+  {
+    return;
+  }
   //  ..............................................................................................
   //  select a color
   if ( ! ak )
@@ -725,7 +734,7 @@ function erg_ecp_lpc__cbk_changed(_i_evt)
     gErgEcp.Widgets.Lpc.mnl.setAttribute("label", "Last-picked colors");
 
     //  change the global selected color, avoiding the user having to click the button
-    erg_ecp_cur__set(v);                                                            //  hex color
+    erg_ecp_cur__set(v);                                                                            //  hex color
 
     return;
   }

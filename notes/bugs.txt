@@ -22,5 +22,9 @@ v-007
 B(003) [11.04.2021]
   In OnDefault() :
     erg_ecp_cur__set(gErgEcp.DefCol.passed_in); -> erg_ecp_cur__set("");
-
-
+====================================================================================================
+v-010
+====================================================================================================
+B(004) [24.12.2021]
+  In erg_ecp_util__rget_all_menuitems() :
+    #HELP and #ABOUT ae not tested, and are registrated as color menuitems

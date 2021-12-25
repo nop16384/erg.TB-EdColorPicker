@@ -21,15 +21,14 @@ TmpFileXhtml2="./obj/tmp/EdColorPicker.tmp2.xhtml"
 TmpFileXhtml3="./obj/tmp/EdColorPicker.tmp3.xhtml"
 TmpFileJs="./obj/tmp/EdColorPicker.js"
 
+# Boxes sizing
 LpcBoxSize=20
 LpcRstSize=$(( LpcBoxSize * 5 + ( 5 - 1 ) * 4 ))
 LpcPopSize=$(( LpcRstSize + 20 ))
 
 LpcCssBoxSize="min-width:10px; max-width:20px; min-height:10px; max-height:20px;"
 LpcCssRstSize="width:${LpcRstSize}px;"
-#LpcCssPopSize="min-width:10px; width:${LpcPopSize}px; max-height:152px;"
 LpcCssPopSize="min-width:10px; width:${LpcPopSize}px; min-height:10px; max-height:124px;"
-
 # ##################################################################################################
 function  ecp_export__EdColorPicker_xhtml
 {
@@ -68,7 +67,7 @@ function  ecp_gen__EdColorPicker_xhtml
     erg_bt__msg_cnt "inserting xhtml code"
     sed "s/__ERG_MARK__LPC_CSS_BOX_SIZE_XHTML__/${LpcCssBoxSize}/" "${TmpFileXhtml2}" > "${TmpFileXhtml3}"
 
-    erg_bt__msg     "sizing the reset button"
+    erg_bt__msg     "sizing the reset / help / about buttons"
     erg_bt__msg_cnt "inserting xhtml code"
     sed "s/__ERG_MARK__LPC_CSS_RST_SIZE_XHTML__/${LpcCssRstSize}/" "${TmpFileXhtml3}" > "${TmpFileXhtml}"
 
