@@ -5,7 +5,7 @@
 		<Option title="erg.TB-EdColorPicker" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="EdColorPicker/;EdColorPicker/buffer/;res/;build/;notes/;omni/;" />
+		<Option virtualFolders="EdColorPicker/;EdColorPicker/buffer/;res/;build/;notes/;omni/;build/TestHelpers/;" />
 		<Build>
 			<Target title="GenColors">
 				<Option output="bin/D/erg" prefix_auto="1" extension_auto="1" />
@@ -35,6 +35,20 @@
 					<Add before="./build/build.bash --export" />
 				</ExtraCommands>
 			</Target>
+			<Target title="Export-Helpers">
+				<Option output="bin/D/erg" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/D/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+				<ExtraCommands>
+					<Add before="cd $(PROJECT_DIR)" />
+					<Add before="chmod u=rwx ./build/build.bash" />
+					<Add before="./build/build.bash --export-helpers" />
+				</ExtraCommands>
+			</Target>
 			<Target title="All">
 				<Option output="bin/D/erg" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/D/" />
@@ -46,7 +60,7 @@
 				<ExtraCommands>
 					<Add before="cd $(PROJECT_DIR)" />
 					<Add before="chmod u=rwx ./build/build.bash" />
-					<Add before="./build/build.bash --gencolors --export" />
+					<Add before="./build/build.bash --gencolors --export --export-helpers" />
 				</ExtraCommands>
 			</Target>
 		</Build>
@@ -58,6 +72,18 @@
 		</Unit>
 		<Unit filename="../../../../sys/usr/local/Thunderbird/omni-78.8.1/chrome/messenger/content/messenger/messengercompose/EdColorPicker.xhtml">
 			<Option virtualFolder="omni/" />
+		</Unit>
+		<Unit filename="build/0brun-tb.bash">
+			<Option virtualFolder="build/TestHelpers/" />
+		</Unit>
+		<Unit filename="build/0build-assets.bash">
+			<Option virtualFolder="build/TestHelpers/" />
+		</Unit>
+		<Unit filename="build/0check.bash">
+			<Option virtualFolder="build/TestHelpers/" />
+		</Unit>
+		<Unit filename="build/0srun-tb.bash">
+			<Option virtualFolder="build/TestHelpers/" />
 		</Unit>
 		<Unit filename="build/build.bash">
 			<Option virtualFolder="build/" />
@@ -71,7 +97,10 @@
 		<Unit filename="notes/todo.txt">
 			<Option virtualFolder="notes/" />
 		</Unit>
-		<Unit filename="notes/version-current.txt">
+		<Unit filename="notes/version-current-lpc.txt">
+			<Option virtualFolder="notes/" />
+		</Unit>
+		<Unit filename="notes/version-current-tb.txt">
 			<Option virtualFolder="notes/" />
 		</Unit>
 		<Unit filename="res/css-colors--generate.bash">
@@ -123,6 +152,7 @@
 			<Option virtualFolder="EdColorPicker/buffer/" />
 			<Option target="Export" />
 			<Option target="All" />
+			<Option target="Export-Helpers" />
 		</Unit>
 		<Extensions>
 			<envvars />

@@ -160,7 +160,7 @@ function ErgEcpCssColor(_i_hex, _i_css_name, _i_color_family)
 
 function  erg_init_colors_array()
 {
-__ERG_MARK__CSS_COLORS_JS_01__
+__ERG_MARK_JS__CSS_COLORS__
 }
 //  ################################################################################################
 //                      Utils
@@ -742,7 +742,7 @@ function erg_ecp_lpc__cbk_changed(_i_evt)
   //  remove a color
   rr  = _i_evt.target.getAttribute("idr");
   rc  = _i_evt.target.getAttribute("idc");
-  rx  = parseInt(rr,10) * 4 + parseInt(rc,10);
+  rx  = parseInt(rr,10) * gErgEcp__LPC_COLS + parseInt(rc,10);
 
   erg_ecpl_lpc("cbk_changed():remove color:row["  + rr + "] col[" + rc + "] ix[" + rx + "]");
 
@@ -778,7 +778,10 @@ var gColorObj;
 var gErgEcp;
 var gErgWidgets;
 
-const   eErgEcpColorValidity =
+const   gErgEcp__LPC_ROWS = 5;
+const   gErgEcp__LPC_COLS = 5;
+
+const   eErgEcpColorValidity  =
 {
   "Y"     :10   ,
   "YHEX"  :11   ,

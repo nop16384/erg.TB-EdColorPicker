@@ -28,3 +28,12 @@ v-010
 B(004) [24.12.2021]
   In erg_ecp_util__rget_all_menuitems() :
     #HELP and #ABOUT ae not tested, and are registrated as color menuitems
+====================================================================================================
+v-011
+====================================================================================================
+B(005) [26.12.2021]
+  In erg_ecp_lpc__cbk_changed() :
+    rx  = parseInt(rr,10) * 4 + parseInt(rc,10); : it is 5, not 4 !!!
+
+B(006) [27.12.2021]
+  In EdColorPicker-template.xhtml : "RightClick" should "LeftClick" for removing a lpc !!!
