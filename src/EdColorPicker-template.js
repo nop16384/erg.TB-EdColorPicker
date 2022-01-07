@@ -18,10 +18,11 @@ function ErgEcpLpcBuffer(_i_str, _i_max_card)
   {
     var i;
     //  ............................................................................................
-    console.log("ErgEcpLpcBuffer::Dump():"+this.d_array.length);
+    _erg_ecp_log("buf","Dump():" + this.d_array.length);
     for ( i = 0 ; i != Math.min(this.d_array.length, this.a_max_card) ; i ++ )
     {
-      console.log("[" + i + "]:" + "[" + this.d_array[i] + "]");
+      _erg_ecp_log("buf", "[" + i + "]:" + "[" + this.d_array[i] + "]")
+      //console.log("[" + i + "]:" + "[" + this.d_array[i] + "]");
     }
   }
   //  ==============================================================================================
@@ -215,6 +216,8 @@ function erg_ecpl_cds(_i_s)                                                     
 
 function erg_ecpl_set_all(_i_b)
 {
+  gErgEcp.Log.buf     = _i_b;
+
   gErgEcp.Log.ctp     = _i_b;
   gErgEcp.Log.lpc     = _i_b;
   gErgEcp.Log.csvhex  = _i_b;
@@ -360,8 +363,7 @@ function erg_ecp_util__rget_all_menuitems(_i_node)
 
   if ( _i_node.nodeName == "menuitem" )
   {
-    if (  ( _i_node.value != "#RESET" )   &&
-          ( _i_node.value != "#HELP"  )   &&
+    if (  ( _i_node.value != "#HELP"  )   &&
           ( _i_node.value != "#ABOUT" )   )
     {
       gErgEcp.Widgets.Lpc.mitems.push(_i_node);
@@ -699,32 +701,42 @@ function erg_ecp_lpc__colors_list__reset()
   erg_ecp_lpc__colors_list__save_to_DOM();
 }
 
+function erg_ecp_lpc__cbk_reset(_i_evt)
+{
+  var ak;
+  //  ..............................................................................................
+  ak  = _i_evt.altKey;
+  //  ..............................................................................................
+  if ( ak )
+  {
+    erg_ecpl_lpc("cbk_reset():reset colors")
+    erg_ecp_lpc__colors_list__reset();
+  }
+}
+
 function erg_ecp_lpc__cbk_changed(_i_evt)
 {
   var v;
   var ak;
   var rr, rc, rx;
-  //var active = _i_evt.getModifierState("Alt");
-  //erg_ecpl_lpc("ACTIVE:" + active);
+  //  ..............................................................................................
+  //  Prevent events from buttons & checkbox contained in menulist ( id="erg_ecp_EDOM_lpc__mnl" )
+  //  beeing processed here, so we spare some uglies _i_evt.stopPropagation() in
+  //  erg_ecp_stg__cbk_clicked() and erg_ecp_stg__cbk_chk_clicked()
+  if ( _i_evt.target.nodeName != "menuitem" )
+    return;
   //  ..............................................................................................
   v   = _i_evt.target.value;
   ak  = _i_evt.altKey;
   //  ..............................................................................................
-  //  reset all colors
-  if ( v.localeCompare("#RESET") == 0 )
-  {
-    erg_ecpl_lpc("cbk_changed():reset colors")
-    erg_ecp_lpc__colors_list__reset();
-    return;
-  }
-  //  no action
+  //  no action for menuitems HELP and ABOUT
   if (  ( v.localeCompare("#HELP")  == 0 )    ||
         ( v.localeCompare("#ABOUT") == 0 )    )
   {
     return;
   }
   //  ..............................................................................................
-  //  select a color
+  //  No Alt key :select a color
   if ( ! ak )
   {
     erg_ecpl_lpc("cbk_changed():select color")
@@ -739,7 +751,7 @@ function erg_ecp_lpc__cbk_changed(_i_evt)
     return;
   }
   //  ..............................................................................................
-  //  remove a color
+  //  Alt key : remove a color
   rr  = _i_evt.target.getAttribute("idr");
   rc  = _i_evt.target.getAttribute("idc");
   rx  = parseInt(rr,10) * gErgEcp__LPC_COLS + parseInt(rc,10);
@@ -762,8 +774,46 @@ function erg_ecp_lpc__cbk_clicked()
   return true;
 }
 //  ################################################################################################
+//                    Settings
+//  ################################################################################################
+function erg_ecp_stg__cbk_clicked(_i_evt)
+{
+  var h = gErgEcp.Widgets.Lpc.Stg.vbox.getAttribute("hidden");
+
+  if ( h == "true" )
+  {
+    gErgEcp.Widgets.Lpc.Stg.btn.setAttribute("label", "↑ Hide settings");
+    gErgEcp.Widgets.Lpc.Stg.vbox.setAttribute("hidden", "false");
+  }
+  else
+  {
+    gErgEcp.Widgets.Lpc.Stg.btn.setAttribute("label", "↓ Show settings");
+    gErgEcp.Widgets.Lpc.Stg.vbox.setAttribute("hidden", "true");
+  }
+}
+
+function erg_ecp_stg__cbk_chk_clicked(_i_evt)
+{
+  if ( _i_evt.target == gErgEcp.Widgets.Lpc.Stg.chk[1] )
+  {
+    gErgEcp__stg_chk[1] = gErgEcp.Widgets.Lpc.Stg.chk[1].checked;
+    erg_ecpl_set_all(gErgEcp__stg_chk[1]);                                                          //  set logs
+  }
+}
+//  ################################################################################################
 //                    Main
 //  ################################################################################################
+
+//
+//  Generated vars
+//
+
+//  const gErgEcp__BUILD_TYPE = "D" / "R";
+__ERG_MARK_JS__BUILD_TYPE__
+
+//
+//  Standard vars
+//
 var insertNew = true;
 var tagname = "TAG NAME";
 var gColor = "";
@@ -780,6 +830,8 @@ var gErgWidgets;
 
 const   gErgEcp__LPC_ROWS = 5;
 const   gErgEcp__LPC_COLS = 5;
+
+var     gErgEcp__stg_chk      = [false, false, false, false];                                       // gErgEcp__stg_chk[0] is unused
 
 const   eErgEcpColorValidity  =
 {
@@ -820,8 +872,6 @@ function Startup()
   gErgEcp                           =   new Object();
 
   gErgEcp.Log                       =   new Object();
-  erg_ecpl_set_all(true);                                                                           //  enable all logs...
-    //gErgEcp.Log.xug                 = false;                                                        //  ...except XUL grid
 
     gErgEcp.Lpc                     =   new Object();
 
@@ -830,6 +880,8 @@ function Startup()
 
     gErgEcp.Widgets                 =   new Object();
       gErgEcp.Widgets.Lpc           =   new Object();
+      gErgEcp.Widgets.Lpc.Stg       =   new Object();
+      gErgEcp.Widgets.Lpc.Stg.chk   =   new Array();
       gErgEcp.Widgets.Css           =   new Object();
       gErgEcp.Widgets.Input         =   new Object();
 
@@ -843,12 +895,43 @@ function Startup()
   gErgEcp.Widgets.Lpc.vbox_mp       =   document.getElementById("erg_ecp_EDOM_lpc__vbox_mp");
   gErgEcp.Widgets.Lpc.mitems        =   new Array();
 
+  gErgEcp.Widgets.Lpc.Stg.btn       =   document.getElementById("erg_ecp_EDOM_stg__btn");
+  gErgEcp.Widgets.Lpc.Stg.vbox      =   document.getElementById("erg_ecp_EDOM_stg__vbox");
+  gErgEcp.Widgets.Lpc.Stg.chk[1]    =   document.getElementById("erg_ecp_EDOM_stg__chk01");
+  gErgEcp.Widgets.Lpc.Stg.chk[2]    =   document.getElementById("erg_ecp_EDOM_stg__chk02");
+  gErgEcp.Widgets.Lpc.Stg.chk[3]    =   document.getElementById("erg_ecp_EDOM_stg__chk03");
+
   gErgEcp.Widgets.Css.mnl           =   document.getElementById("erg_ecp_EDOM_css__mnl");
   gErgEcp.Widgets.Css.btn           =   document.getElementById("erg_ecp_EDOM_css__btn");
   gErgEcp.Widgets.Input.btn         =   document.getElementById("erg_ecp_EDOM_inp__btn");
   gErgEcp.Widgets.Input.txt         =   document.getElementById("erg_ecp_EDOM_inp__txt");
 
   gErgEcp.Lpc.alt_key_pressed       =   false;
+
+  if ( gErgEcp__BUILD_TYPE == "D" )
+  {
+    gErgEcp__stg_chk[1] = true;                                                                     // gErgEcp__stg_chk[0] is unused
+    gErgEcp__stg_chk[2] = false;
+    gErgEcp__stg_chk[3] = false;
+  }
+  else
+  {
+    gErgEcp__stg_chk[1] = false;                                                                    // gErgEcp__stg_chk[0] is unused
+    gErgEcp__stg_chk[2] = false;
+    gErgEcp__stg_chk[3] = false;
+  }
+
+  //  logs
+  erg_ecpl_set_all(gErgEcp__stg_chk[1]);                                                            //  set logs
+
+  if ( gErgEcp__BUILD_TYPE == "D" )                                                                 //  tune logs for debug mode
+  {
+    gErgEcp.Log.xug = false;                                                                        //  XUL grid
+  }
+
+  gErgEcp.Widgets.Lpc.Stg.chk[1].checked = gErgEcp__stg_chk[01];                                    //  Because it dont work by xhtml init
+  gErgEcp.Widgets.Lpc.Stg.chk[2].checked = gErgEcp__stg_chk[02];
+  gErgEcp.Widgets.Lpc.Stg.chk[3].checked = gErgEcp__stg_chk[03];
 
   erg_ecp_util__rget_all_menuitems(gErgEcp.Widgets.Lpc.vbox_mp);
   gErgEcp.Lpc.card                  =   gErgEcp.Widgets.Lpc.mitems.length;

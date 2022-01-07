@@ -21,24 +21,39 @@
   <script src="chrome://messenger/content/messengercompose/EdColorPicker.js"/>
   <script src="chrome://messenger/content/dialogShadowDom.js"/>
 
+  <!-- =========================================================================================
+       POPUPS
+       ========================================================================================= -->
   <popupset>
-    <tooltip id="tip_rst" orient="vertical" style="background-color: #33DD00;">
-      <description value="Reset all colors"/>
+    <tooltip id="tip_rst">
+
+      <html:div style="font-family:monospace; font-size:11px">Alt + LeftClick
+resets all colors</html:div>
+
     </tooltip>
   </popupset>
 
   <popupset>
-    <tooltip id="tip_hlp" orient="vertical" style="background-color: #33DD00;">
-      <description value="Alt + LeftClick deletes a color"/>
+    <tooltip id="tip_hlp">
+
+      <html:div style="font-family:monospace; font-size:11px"><html:b>(1) </html:b>LeftClick selects a color
+<html:b>(2) </html:b>Alt + LeftClick deletes a color</html:div>
+
     </tooltip>
   </popupset>
 
   <popupset>
-    <tooltip id="tip_abt" orient="vertical" style="background-color: #33DD00;">
-      <description value="Version : __ERG_MARK_XHTML__VERSION__"/>
-      <description value="https://github.com/earlgrey-bis/erg.TB-EdColorPicker"/>
+    <tooltip id="tip_abt">
+
+      <html:div style="font-family:monospace; font-size:11px">Version : __ERG_MARK_XHTML__VERSION__
+https://github.com/earlgrey-bis/erg.TB-EdColorPicker</html:div>
+
     </tooltip>
   </popupset>
+
+  <!-- =========================================================================================
+       ???
+       ========================================================================================= -->
 
   <spacer id="location" offsetX="50" offsetY="50" persist="offsetX offsetY"/>
 
@@ -102,7 +117,7 @@
 
               <!-- border:1px solid black; -->
 
-              <vbox id="erg_ecp_EDOM_lpc__vbox_mp">                                                 <!-- MENUPOPUP 1 +VBOX  -->
+              <vbox id="erg_ecp_EDOM_lpc__vbox_mp">
 
                   <hbox>
                     <box style="padding:2px;"> <menuitem idr="0" idc="0" label="" value="#da504d" style="background-color:#da504d; __ERG_MARK_XHTML__LPC_CSS_BOX_SIZE__ "/></box>
@@ -139,23 +154,46 @@
                     <box style="padding:2px;"> <menuitem idr="4" idc="3" label="" value="#90ee90" style="background-color:#90ee90; __ERG_MARK_XHTML__LPC_CSS_BOX_SIZE__"/></box>
                     <box style="padding:2px;"> <menuitem idr="4" idc="4" label="" value="#889044" style="background-color:#90ee90; __ERG_MARK_XHTML__LPC_CSS_BOX_SIZE__ "/></box>
                   </hbox>
-
                   <!-- ========================== Reset button ================================= -->
                   <hbox style="padding:2px; align:center;">
-                    <menuitem label="Reset all" value="#RESET" tooltip="tip_rst" style="align:right; background-color:#cccccc; __ERG_MARK_XHTML__LPC_CSS_RHA_SIZE__"/>
+                  <button
+                    id="erg_ecp_EDOM_lpc__btn_rst"
+                    label="Reset colors"
+                    tooltip="tip_rst"
+                    style="margin-left:0px; margin-right:0px; margin-top:0px; margin-bottom:0px; __ERG_MARK_XHTML__LPC_CSS_RHA_SIZE__"
+                    oncommand="erg_ecp_lpc__cbk_reset(event)">
+                  </button>
                   </hbox>
-
                   <!-- ========================== Help  button ================================= -->
+                  <hbox style="padding:2px 2px 4px 2px; align:center;">
+                    <menuitem label="Help" value="#HELP" tooltip="tip_hlp" style="align:right; background-color:#dadad5; __ERG_MARK_XHTML__LPC_CSS_RHA_SIZE__"/>
+                  </hbox>
+                  <!-- ========================== Separator ==================================== -->
+                  <separator class="groove"/>
+                  <!-- ========================== Settings button ============================== -->
                   <hbox style="padding:2px; align:center;">
-                    <menuitem label="Help" value="#HELP" tooltip="tip_hlp" style="align:right; background-color:#cccccc; __ERG_MARK_XHTML__LPC_CSS_RHA_SIZE__"/>
+                  <button
+                    id="erg_ecp_EDOM_stg__btn"
+                    label="↓ Show settings"
+                    style="margin-left:0px; margin-right:0px; margin-top:2px; margin-bottom:0px; __ERG_MARK_XHTML__LPC_CSS_RHA_SIZE__"
+                    oncommand="erg_ecp_stg__cbk_clicked(event)">
+                  </button>
                   </hbox>
 
+                  <vbox
+                    id="erg_ecp_EDOM_stg__vbox"
+                    hidden="true"
+                    style="padding:0px; align:center; background-color:#eaeae0">
+                    <checkbox id="erg_ecp_EDOM_stg__chk01" disabled="false" label="Show logs" checked="false" oncommand="erg_ecp_stg__cbk_chk_clicked(event)"/>
+                    <checkbox id="erg_ecp_EDOM_stg__chk02" disabled="true"  label="option 02" checked="false" oncommand="erg_ecp_stg__cbk_chk_clicked(event)"/>
+                    <checkbox id="erg_ecp_EDOM_stg__chk03" disabled="true"  label="option 03" checked="false" oncommand="erg_ecp_stg__cbk_chk_clicked(event)"/>
+                  </vbox>
                   <!-- ========================== About button ================================= -->
                   <hbox style="padding:2px; align:center;">
-                    <menuitem label="About" value="#ABOUT" tooltip="tip_abt" style="align:right; background-color:#cccccc; __ERG_MARK_XHTML__LPC_CSS_RHA_SIZE__"/>
+                    <menuitem label="About" value="#ABOUT" tooltip="tip_abt" style="align:right; background-color:#dadad5; __ERG_MARK_XHTML__LPC_CSS_RHA_SIZE__"/>
                   </hbox>
 
-              </vbox>                                                                               <!-- MENUPOPUP 1 -VBOX  -->
+              </vbox>
 
             </menupopup>
 

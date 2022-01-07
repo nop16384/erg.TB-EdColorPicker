@@ -4,11 +4,10 @@ source "${ERG__PATH_BINARIES}/build-tools/erg.build-tools_main.bash"
 
 erg_bt__init
 # **************************************************************************************************
-PARAM1="$1"
-
 OptGenColors=""
 OptExport=""
 OptExportHelpers=""
+OptBldType="R"
 
 DirExport="/home/sys/usr/local/Thunderbird"
 
@@ -22,17 +21,24 @@ HelperFiles="./build/0brun-tb.bash"
 IFileCssXhtml="./res/css-colors.xhtml"
 IFileCssJs="./res/css-colors.js"
 
-TmpFileXhtml="./obj/tmp/EdColorPicker.xhtml"
 TmpFileXhtml0="./obj/tmp/EdColorPicker.tmp0.xhtml"
 TmpFileXhtml1="./obj/tmp/EdColorPicker.tmp1.xhtml"
 TmpFileXhtml2="./obj/tmp/EdColorPicker.tmp2.xhtml"
 TmpFileXhtml3="./obj/tmp/EdColorPicker.tmp3.xhtml"
+TmpFileXhtml="./obj/tmp/EdColorPicker.xhtml"
+
+TmpFileJs0="./obj/tmp/EdColorPicker.tmp0.js"
 TmpFileJs="./obj/tmp/EdColorPicker.js"
 
 # Version
 VersionTb=$( cat "${VersionFileTb}" )
 VersionLpc=$( cat "${VersionFileLpc}" )
 Version="TB-${VersionTb}--V-${VersionLpc}"
+
+# Debug / Release
+declare -A BldType;
+BldType["R"]="const gErgEcp__BUILD_TYPE = \"R\";"
+BldType["D"]="const gErgEcp__BUILD_TYPE = \"D\";"
 
 # Boxes sizing
 LpcBoxSize=20
@@ -105,27 +111,47 @@ function  ecp_gen__EdColorPicker_xhtml
     sed "s/__ERG_MARK_XHTML__LPC_CSS_RHA_SIZE__/${LpcCssRhaSize}/" "${TmpFileXhtml3}" > "${TmpFileXhtml}"
 
   erg_bt__log_spc_dec
-
 }
+
 function  ecp_gen__EdColorPicker_js
 {
+  local s;
+  # ................................................................................................
+  eval "s=\${BldType[${OptBldType}]}"
+
   erg_bt__msg     "generating EdColorPicker.js"
 
-  erg_bt__msg_cnt "converting file for sed"
-  CssJs=$( sed '$!s/$/\\n/'  "${IFileCssJs}" | tr -d '\n'  | sed 's/\//\\\//g' )
+  erg_bt__log_spc_inc
 
-  erg_bt__msg_cnt "inserting js code"
-  sed "s/__ERG_MARK_JS__CSS_COLORS__/${CssJs}/" "${TplFileJs}" > "${TmpFileJs}"
+    erg_bt__msg     "inserting build type"
+    erg_bt__msg_cnt "inserting build type js code"
+    sed "s/__ERG_MARK_JS__BUILD_TYPE__/${BldType[${OptBldType}]}/" "${TplFileJs}" > "${TmpFileJs0}"
+
+    erg_bt__msg     "inserting css colors"
+    erg_bt__msg_cnt "converting css-colors file for sed"
+    CssJs=$( sed '$!s/$/\\n/'  "${IFileCssJs}" | tr -d '\n'  | sed 's/\//\\\//g' )
+    erg_bt__msg_cnt "inserting css-colors js code"
+    sed "s/__ERG_MARK_JS__CSS_COLORS__/${CssJs}/" "${TmpFileJs0}" > "${TmpFileJs}"
+
+  erg_bt__log_spc_dec
 }
 # ##################################################################################################
 for Opt in "$@" ; do
 
+  if [[ "${Opt}" == "--buildR"          ]]  ; then OptBldType="R"         ; fi
+  if [[ "${Opt}" == "--buildD"          ]]  ; then OptBldType="D"         ; fi
   if [[ "${Opt}" == "--gencolors"       ]]  ; then OptGenColors="1"       ; fi
   if [[ "${Opt}" == "--export"          ]]  ; then OptExport="1"          ; fi
   if [[ "${Opt}" == "--export-helpers"  ]]  ; then OptExportHelpers="1"   ; fi
 
 done
 # **************************************************************************************************
+if [[ "${OptBldType}" == "R" ]] ; then
+  erg_bt__msg "build type: *** RELEASE ***"
+else
+  erg_bt__msg "build type:*** DEBUG ***"
+fi
+
 if [[ "${OptGenColors}" == "1" ]] ; then
 
   erg_bt__msg "generating colors (.js & .xhtml )"

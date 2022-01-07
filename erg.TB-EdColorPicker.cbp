@@ -21,7 +21,7 @@
 					<Add before="./build/build.bash --gencolors" />
 				</ExtraCommands>
 			</Target>
-			<Target title="Export">
+			<Target title="Export-D">
 				<Option output="bin/D/erg" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/D/" />
 				<Option type="1" />
@@ -32,7 +32,21 @@
 				<ExtraCommands>
 					<Add before="cd $(PROJECT_DIR)" />
 					<Add before="chmod u=rwx ./build/build.bash" />
-					<Add before="./build/build.bash --export" />
+					<Add before="./build/build.bash --buildD --export" />
+				</ExtraCommands>
+			</Target>
+			<Target title="Export-R">
+				<Option output="bin/D/erg" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/D/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+				<ExtraCommands>
+					<Add before="cd $(PROJECT_DIR)" />
+					<Add before="chmod u=rwx ./build/build.bash" />
+					<Add before="./build/build.bash --BuildR --export" />
 				</ExtraCommands>
 			</Target>
 			<Target title="Export-Helpers">
@@ -150,9 +164,10 @@
 		</Unit>
 		<Unit filename="src/buffer/buffer.js">
 			<Option virtualFolder="EdColorPicker/buffer/" />
-			<Option target="Export" />
+			<Option target="Export-R" />
 			<Option target="All" />
 			<Option target="Export-Helpers" />
+			<Option target="Export-D" />
 		</Unit>
 		<Extensions>
 			<envvars />
