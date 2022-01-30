@@ -11,6 +11,7 @@ OptBldType="R"
 
 DirExport="/home/sys/usr/local/Thunderbird"
 
+TplFileMCXhtml="./src/messengercompose-template.xhtml"
 TplFileXhtml="./src/EdColorPicker-template.xhtml"
 TplFileJs="./src/EdColorPicker-template.js"
 VersionFileTb="./notes/version-current-tb.txt"
@@ -20,6 +21,8 @@ HelperFiles="./build/0brun-tb.bash"
 
 IFileCssXhtml="./res/css-colors.xhtml"
 IFileCssJs="./res/css-colors.js"
+
+TmpFileMCXhtml="./obj/tmp/messengercompose.xhtml"
 
 TmpFileXhtml0="./obj/tmp/EdColorPicker.tmp0.xhtml"
 TmpFileXhtml1="./obj/tmp/EdColorPicker.tmp1.xhtml"
@@ -66,6 +69,12 @@ function  ecp_export__helpers
   cp -f ${HelperFiles} "${DirExport}"
 }
 
+function  ecp_export__messengercompose_xhtml
+{
+  erg_bt__msg "copy messengercompose.xhtml file"
+  cp "${TmpFileMCXhtml}" "${DirExport}/omni/chrome/messenger/content/messenger/messengercompose/messengercompose.xhtml"
+}
+
 function  ecp_export__EdColorPicker_xhtml
 {
   erg_bt__msg "copy xhtml file"
@@ -78,6 +87,17 @@ function  ecp_export__EdColorPicker_js
   cp "${TmpFileJs}" "${DirExport}/omni/chrome/messenger/content/messenger/messengercompose/EdColorPicker.js"
 }
 # **************************************************************************************************
+function  ecp_gen__messengercompose_xhtml
+{
+  erg_bt__msg "generating messengercompose.xhtml"
+
+  erg_bt__log_spc_inc
+
+  cp  "${TplFileMCXhtml}" "${TmpFileMCXhtml}"
+
+  erg_bt__log_spc_dec
+}
+
 function  ecp_gen__EdColorPicker_xhtml
 {
   # multiple tmp files are used for debugging purpose
@@ -179,10 +199,14 @@ if [[ "${OptExport}" == "1" ]] ; then
 
   ecp_gen__EdColorPicker_xhtml
 
+  ecp_gen__messengercompose_xhtml
+
   ecp_export__release_file
 
   ecp_export__EdColorPicker_xhtml
 
   ecp_export__EdColorPicker_js
+
+  ecp_export__messengercompose_xhtml
 
 fi

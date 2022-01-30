@@ -25,6 +25,7 @@ DirJar2="tmp/DirJar2"
 
 F1="chrome/messenger/content/messenger/messengercompose/EdColorPicker.xhtml"
 F2="chrome/messenger/content/messenger/messengercompose/EdColorPicker.js"
+F3="chrome/messenger/content/messenger/messengercompose/messengercompose.xhtml"
 
 if [[ ! -f "${Jar1}" ]] ; then
 
@@ -44,7 +45,7 @@ echo "Checking ${Jar1} vs ${Jar2}"
 
 echo "  emptying tmp directory"
   rm -rf "tmp/*"
-  
+
 echo "  creating tmp directories"
   mkdir -p "${DirJar1}"
   mkdir -p "${DirJar2}"
@@ -59,6 +60,7 @@ echo "  extracting ${Jar2}"
 echo "  comparing extracting ${Jar2}"
   diff -q -s "${DirJar1}/${F1}" "${DirJar2}/${F1}"
   diff -q -s "${DirJar1}/${F2}" "${DirJar2}/${F2}"
+  diff -q -s "${DirJar1}/${F3}" "${DirJar2}/${F3}"
 
 
 

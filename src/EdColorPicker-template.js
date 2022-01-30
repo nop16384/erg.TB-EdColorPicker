@@ -884,6 +884,7 @@ function Startup()
       gErgEcp.Widgets.Lpc.Stg.chk   =   new Array();
       gErgEcp.Widgets.Css           =   new Object();
       gErgEcp.Widgets.Input         =   new Object();
+      gErgEcp.Widgets.Toolbar       =   new Object();
 
     gErgEcp.Colors                  =   new Object();
       gErgEcp.Colors.Css            =   new Array();
@@ -905,6 +906,11 @@ function Startup()
   gErgEcp.Widgets.Css.btn           =   document.getElementById("erg_ecp_EDOM_css__btn");
   gErgEcp.Widgets.Input.btn         =   document.getElementById("erg_ecp_EDOM_inp__btn");
   gErgEcp.Widgets.Input.txt         =   document.getElementById("erg_ecp_EDOM_inp__txt");
+
+  gErgEcp.Widgets.Toolbar.win       =   window.opener;  //document.getElementById("erg_ecp_EDOM_tbb-fg");
+  gErgEcp.Widgets.Toolbar.doc       =   gErgEcp.Widgets.Toolbar.win.document;
+  gErgEcp.Widgets.Toolbar.fg        =   gErgEcp.Widgets.Toolbar.doc.getElementById("erg_ecp_EDOM_tbb_fg");
+  gErgEcp.Widgets.Toolbar.bg        =   gErgEcp.Widgets.Toolbar.doc.getElementById("erg_ecp_EDOM_tbb_bg");
 
   gErgEcp.Lpc.alt_key_pressed       =   false;
 

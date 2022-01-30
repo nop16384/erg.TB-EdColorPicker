@@ -169,6 +169,9 @@
 			<Option target="Export-Helpers" />
 			<Option target="Export-D" />
 		</Unit>
+		<Unit filename="src/messengercompose-template.xhtml">
+			<Option virtualFolder="EdColorPicker/" />
+		</Unit>
 		<Extensions>
 			<envvars />
 			<code_completion />
