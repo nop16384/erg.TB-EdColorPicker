@@ -37,3 +37,9 @@ B(005) [26.12.2021]
 
 B(006) [27.12.2021]
   In EdColorPicker-template.xhtml : "RightClick" should "LeftClick" for removing a lpc !!!
+====================================================================================================
+v-014
+====================================================================================================
+B(007) [30.01.22] the hbox surrounding the new TollbarButtons for fg & bg colors is mandatory
+  for avoiding display bug, but not for all the linux box acount !
+  Maybe interference with emoji or something else ?

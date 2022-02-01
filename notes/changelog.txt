@@ -76,4 +76,8 @@ v-013
 [03.01.21]  Log channel for buffer
 [03.01.21]  UI changes : Settings ( Log only at the moment ) + buttons instead of menuitems
 [03.01.21]  build system : Release / Debug
-
+====================================================================================================
+v-014
+====================================================================================================
+[30.01.22]  Introduced option --buildMC, which replace the stack with 2 distinct buttons for fg
+  and bg color.

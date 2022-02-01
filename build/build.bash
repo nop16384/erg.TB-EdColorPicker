@@ -8,22 +8,37 @@ OptGenColors=""
 OptExport=""
 OptExportHelpers=""
 OptBldType="R"
+OptBldMC="org"
 
 DirExport="/home/sys/usr/local/Thunderbird"
 
-TplFileMCXhtml="./src/messengercompose-template.xhtml"
+# Debug / Release
+declare -A BldType;
+BldType["R"]="const gErgEcp__BUILD_TYPE = \"R\";"
+BldType["D"]="const gErgEcp__BUILD_TYPE = \"D\";"
+
+# Get Versions
+VersionFileTb="./src/version-current-tb.txt"
+VersionFileLpc="./src/version-current-lpc.txt"
+VersionFileMCXhtml="./src/version-current-mcxhtml.txt"
+
+VersionTb=$( cat "${VersionFileTb}" )
+VersionLpc=$( cat "${VersionFileLpc}" )
+VersionMCXhtml=$( cat "${VersionFileMCXhtml}" )
+Version="TB-${VersionTb}--V-${VersionLpc}"
+
+TplFileMCXhtml=""
+TplFileMCXhtml_erg="./src/messengercompose-template.xhtml"
+TplFileMCXhtml_org="./src/messengercompose-${VersionMCXhtml}.xhtml"
 TplFileXhtml="./src/EdColorPicker-template.xhtml"
 TplFileJs="./src/EdColorPicker-template.js"
-VersionFileTb="./notes/version-current-tb.txt"
-VersionFileLpc="./notes/version-current-lpc.txt"
+
 HelperFiles="./build/0brun-tb.bash ./build/0srun-tb.bash ./build/0build-assets.bash ./build/0check.bash"
-HelperFiles="./build/0brun-tb.bash"
 
 IFileCssXhtml="./res/css-colors.xhtml"
 IFileCssJs="./res/css-colors.js"
 
 TmpFileMCXhtml="./obj/tmp/messengercompose.xhtml"
-
 TmpFileXhtml0="./obj/tmp/EdColorPicker.tmp0.xhtml"
 TmpFileXhtml1="./obj/tmp/EdColorPicker.tmp1.xhtml"
 TmpFileXhtml2="./obj/tmp/EdColorPicker.tmp2.xhtml"
@@ -32,16 +47,6 @@ TmpFileXhtml="./obj/tmp/EdColorPicker.xhtml"
 
 TmpFileJs0="./obj/tmp/EdColorPicker.tmp0.js"
 TmpFileJs="./obj/tmp/EdColorPicker.js"
-
-# Version
-VersionTb=$( cat "${VersionFileTb}" )
-VersionLpc=$( cat "${VersionFileLpc}" )
-Version="TB-${VersionTb}--V-${VersionLpc}"
-
-# Debug / Release
-declare -A BldType;
-BldType["R"]="const gErgEcp__BUILD_TYPE = \"R\";"
-BldType["D"]="const gErgEcp__BUILD_TYPE = \"D\";"
 
 # Boxes sizing
 LpcBoxSize=20
@@ -89,9 +94,17 @@ function  ecp_export__EdColorPicker_js
 # **************************************************************************************************
 function  ecp_gen__messengercompose_xhtml
 {
+  local f
+  # ................................................................................................
   erg_bt__msg "generating messengercompose.xhtml"
 
   erg_bt__log_spc_inc
+
+  if [[ "${OptBldMC}" == "erg" ]] ; then
+    TplFileMCXhtml="${TplFileMCXhtml_erg}"
+  else
+    TplFileMCXhtml="${TplFileMCXhtml_org}"
+  fi
 
   cp  "${TplFileMCXhtml}" "${TmpFileMCXhtml}"
 
@@ -160,6 +173,7 @@ for Opt in "$@" ; do
 
   if [[ "${Opt}" == "--buildR"          ]]  ; then OptBldType="R"         ; fi
   if [[ "${Opt}" == "--buildD"          ]]  ; then OptBldType="D"         ; fi
+  if [[ "${Opt}" == "--buildMC"         ]]  ; then OptBldMC="erg"         ; fi
   if [[ "${Opt}" == "--gencolors"       ]]  ; then OptGenColors="1"       ; fi
   if [[ "${Opt}" == "--export"          ]]  ; then OptExport="1"          ; fi
   if [[ "${Opt}" == "--export-helpers"  ]]  ; then OptExportHelpers="1"   ; fi

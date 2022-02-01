@@ -2563,71 +2563,23 @@
           </menupopup>
         </menulist>
 
-                                                                                                    <!-- ERG + -->
-        <!--
-
         <toolbaritem id="color-buttons-container"
                      class="formatting-button"
                      align="center">
           <stack id="ColorButtons">
-            <box class="color-button" id="TextColorButton"
-                 onclick="if (!this.hasAttribute('disabled') || this.getAttribute('disabled') != 'true') { EditorSelectColor('Text', event); }"
-                 tooltiptext="&TextColorButton.tooltip;"
-                 observes="cmd_fontColor"
-                 oncommand="/* See MsgComposeCommands.js::updateAllItems for why this attribute is needed here. */"/>
             <box class="color-button" id="BackgroundColorButton"
                  onclick="if (!this.hasAttribute('disabled') || this.getAttribute('disabled') != 'true') { EditorSelectColor('', event); }"
                  tooltiptext="&BackgroundColorButton.tooltip;"
                  observes="cmd_backgroundColor"
                  oncommand="/* See MsgComposeCommands.js::updateAllItems for why this attribute is needed here. */"/>
+            <box class="color-button" id="TextColorButton"
+                 onclick="if (!this.hasAttribute('disabled') || this.getAttribute('disabled') != 'true') { EditorSelectColor('Text', event); }"
+                 tooltiptext="&TextColorButton.tooltip;"
+                 observes="cmd_fontColor"
+                 oncommand="/* See MsgComposeCommands.js::updateAllItems for why this attribute is needed here. */"/>
           </stack>
         </toolbaritem>
 
-        -->
-
-        <hbox
-          style="margin:0px;">
-
-        <toolbarbutton
-            id="erg_ecp_EDOM_tbb_fg"
-            class="formatting-button"
-            type="menu"
-            image=""
-            label=""
-            style="margin:0px; padding:0px; width:24px"
-            tooltiptext="&TextColorButton.tooltip;"
-            onclick="if (!this.hasAttribute('disabled') || this.getAttribute('disabled') != 'true') { EditorSelectColor('Text', event); }">
-
-            <box
-              class="color-button"
-              id="TextColorButton"
-              style="padding:0px; width:12px; height:12px; border-style:solid ; border-color:black; border-width:1px;"
-              oncommand="/* See MsgComposeCommands.js::updateAllItems for why this attribute is needed here. */">
-            </box>
-        </toolbarbutton>
-
-        <toolbarbutton
-            id="erg_ecp_EDOM_tbb_bg"
-            class="formatting-button"
-            type="menu"
-            image=""
-            label=""
-            style="margin:0px; padding:0px; width:24px"
-            tooltiptext="&BackgroundColorButton.tooltip;"
-            onclick="if (!this.hasAttribute('disabled') || this.getAttribute('disabled') != 'true') { EditorSelectColor('', event); }">
-
-            <box
-              class="color-button"
-              id="BackgroundColorButton"
-              style="padding:0px; width:12px; height:12px; border-style:solid ; border-color:black; border-width:1px;"
-              oncommand="/* See MsgComposeCommands.js::updateAllItems for why this attribute is needed here. */">
-            </box>
-        </toolbarbutton>
-
-        </hbox>
-
-
-                                                                                                    <!-- ERG - -->
         <toolbarbutton id="AbsoluteFontSizeButton"
                        class="formatting-button"
                        tooltiptext="&absoluteFontSizeToolbarCmd.tooltip;"

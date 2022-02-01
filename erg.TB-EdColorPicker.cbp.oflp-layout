@@ -5,6 +5,9 @@
 	<File name="build/0build-assets.bash" uid="015035017000256" />
 	<File name="build/0check.bash" uid="015035017000256" />
 	<File name="build/0srun-tb.bash" uid="015035017000256" />
+	<File name="notes/bugs.txt" uid="015035017000256" />
+	<File name="notes/changelog.txt" uid="015035017000256" />
+	<File name="notes/todo.txt" uid="015035017000256" />
 	<File name="res/css-colors--generate.bash" uid="015037007000701" />
 	<File name="res/css-colors-147--raw.txt" uid="015037007000701" />
 	<File name="res/css-colors-147-blue--raw.txt" uid="015037007000701" />

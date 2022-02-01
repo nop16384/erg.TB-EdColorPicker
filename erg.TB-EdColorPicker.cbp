@@ -5,7 +5,7 @@
 		<Option title="erg.TB-EdColorPicker" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="EdColorPicker/;EdColorPicker/buffer/;res/;build/;notes/;omni/;build/TestHelpers/;" />
+		<Option virtualFolders="EdColorPicker/;EdColorPicker/buffer/;res/;build/;notes/;omni/;build/TestHelpers/;EdColorPicker/versions/;" />
 		<Build>
 			<Target title="GenColors">
 				<Option output="bin/D/erg" prefix_auto="1" extension_auto="1" />
@@ -21,7 +21,21 @@
 					<Add before="./build/build.bash --gencolors" />
 				</ExtraCommands>
 			</Target>
-			<Target title="Export-D">
+			<Target title="Export-Helpers">
+				<Option output="bin/D/erg" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/D/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+				<ExtraCommands>
+					<Add before="cd $(PROJECT_DIR)" />
+					<Add before="chmod u=rwx ./build/build.bash" />
+					<Add before="./build/build.bash --export-helpers" />
+				</ExtraCommands>
+			</Target>
+			<Target title="XP-D">
 				<Option output="bin/D/erg" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/D/" />
 				<Option type="1" />
@@ -35,7 +49,7 @@
 					<Add before="./build/build.bash --buildD --export" />
 				</ExtraCommands>
 			</Target>
-			<Target title="Export-R">
+			<Target title="XP-R">
 				<Option output="bin/D/erg" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/D/" />
 				<Option type="1" />
@@ -46,10 +60,10 @@
 				<ExtraCommands>
 					<Add before="cd $(PROJECT_DIR)" />
 					<Add before="chmod u=rwx ./build/build.bash" />
-					<Add before="./build/build.bash --BuildR --export" />
+					<Add before="./build/build.bash --buildR --export" />
 				</ExtraCommands>
 			</Target>
-			<Target title="Export-Helpers">
+			<Target title="XP+MC-D">
 				<Option output="bin/D/erg" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/D/" />
 				<Option type="1" />
@@ -60,7 +74,21 @@
 				<ExtraCommands>
 					<Add before="cd $(PROJECT_DIR)" />
 					<Add before="chmod u=rwx ./build/build.bash" />
-					<Add before="./build/build.bash --export-helpers" />
+					<Add before="./build/build.bash --buildD --buildMC --export" />
+				</ExtraCommands>
+			</Target>
+			<Target title="XP+MC-R">
+				<Option output="bin/D/erg" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/D/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+				<ExtraCommands>
+					<Add before="cd $(PROJECT_DIR)" />
+					<Add before="chmod u=rwx ./build/build.bash" />
+					<Add before="./build/build.bash --buildR --buildMC --export" />
 				</ExtraCommands>
 			</Target>
 			<Target title="All">
@@ -111,12 +139,6 @@
 		<Unit filename="notes/todo.txt">
 			<Option virtualFolder="notes/" />
 		</Unit>
-		<Unit filename="notes/version-current-lpc.txt">
-			<Option virtualFolder="notes/" />
-		</Unit>
-		<Unit filename="notes/version-current-tb.txt">
-			<Option virtualFolder="notes/" />
-		</Unit>
 		<Unit filename="res/css-colors--generate.bash">
 			<Option virtualFolder="res/" />
 		</Unit>
@@ -164,13 +186,27 @@
 		</Unit>
 		<Unit filename="src/buffer/buffer.js">
 			<Option virtualFolder="EdColorPicker/buffer/" />
-			<Option target="Export-R" />
+			<Option target="XP-R" />
 			<Option target="All" />
 			<Option target="Export-Helpers" />
-			<Option target="Export-D" />
+			<Option target="XP-D" />
+			<Option target="XP+MC-D" />
+			<Option target="XP+MC-R" />
+		</Unit>
+		<Unit filename="src/messengercompose-91.05.00.xhtml">
+			<Option virtualFolder="EdColorPicker/" />
 		</Unit>
 		<Unit filename="src/messengercompose-template.xhtml">
 			<Option virtualFolder="EdColorPicker/" />
+		</Unit>
+		<Unit filename="src/version-current-lpc.txt">
+			<Option virtualFolder="EdColorPicker/versions/" />
+		</Unit>
+		<Unit filename="src/version-current-mcxhtml.txt">
+			<Option virtualFolder="EdColorPicker/versions/" />
+		</Unit>
+		<Unit filename="src/version-current-tb.txt">
+			<Option virtualFolder="EdColorPicker/versions/" />
 		</Unit>
 		<Extensions>
 			<envvars />

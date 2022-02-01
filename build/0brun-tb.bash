@@ -11,7 +11,7 @@ echo "cd .."
 cd ../
 echo "now in $(pwd)"
 
-echo "replacing omni,ja"
+echo "replacing omni.ja"
 cp omni.ja.n thunderbird/omni.ja
 
 echo "launching..."
