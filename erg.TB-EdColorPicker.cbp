@@ -5,7 +5,7 @@
 		<Option title="erg.TB-EdColorPicker" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="EdColorPicker/;EdColorPicker/buffer/;res/;build/;notes/;omni/;build/TestHelpers/;EdColorPicker/versions/;" />
+		<Option virtualFolders="EdColorPicker/;EdColorPicker/buffer/;res/;build/;notes/;omni/;build/TestHelpers/;EdColorPicker/versions/" />
 		<Build>
 			<Target title="GenColors">
 				<Option output="bin/D/erg" prefix_auto="1" extension_auto="1" />
@@ -193,6 +193,9 @@
 			<Option target="XP+MC-D" />
 			<Option target="XP+MC-R" />
 		</Unit>
+		<Unit filename="src/messengercompose-102.02.02.xhtml">
+			<Option virtualFolder="EdColorPicker/" />
+		</Unit>
 		<Unit filename="src/messengercompose-91.05.00.xhtml">
 			<Option virtualFolder="EdColorPicker/" />
 		</Unit>
@@ -208,10 +211,6 @@
 		<Unit filename="src/version-current-tb.txt">
 			<Option virtualFolder="EdColorPicker/versions/" />
 		</Unit>
-		<Extensions>
-			<envvars />
-			<code_completion />
-			<debugger />
-		</Extensions>
+		<Extensions />
 	</Project>
 </CodeBlocks_project_file>
