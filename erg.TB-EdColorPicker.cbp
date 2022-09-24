@@ -196,6 +196,9 @@
 		<Unit filename="src/messengercompose-102.02.02.xhtml">
 			<Option virtualFolder="EdColorPicker/" />
 		</Unit>
+		<Unit filename="src/messengercompose-102.03.00.xhtml">
+			<Option virtualFolder="EdColorPicker/" />
+		</Unit>
 		<Unit filename="src/messengercompose-91.05.00.xhtml">
 			<Option virtualFolder="EdColorPicker/" />
 		</Unit>

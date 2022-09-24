@@ -29,11 +29,11 @@ LpcVersionStr="v-${LpcVersionNum}"
 Version="${TbVersionStr}--${LpcVersionStr}"
 echo "(inf)Version [${Version}]"
 
-#	------------------------------------------------------------------------------------------------
+#	------------------------------------------------------------------------------------------------messengercompose.xhtml
 
 echo "(inf)>Building 2-files zip archive"
 
-zip -q9XD "TB-EdColorPicker__${Version}__2-files.zip" "omni/chrome/messenger/content/messenger/messengercompose/EdColorPicker.xhtml" "omni/chrome/messenger/content/messenger/messengercompose/EdColorPicker.js"
+zip -q9XD "TB-EdColorPicker__${Version}__3-files.zip" "omni/chrome/messenger/content/messenger/messengercompose/EdColorPicker.xhtml" "omni/chrome/messenger/content/messenger/messengercompose/EdColorPicker.js" "omni/chrome/messenger/content/messenger/messengercompose/.xhtml"
 
 #	------------------------------------------------------------------------------------------------
 echo "(inf)>Building omni.ja 7z archive"
