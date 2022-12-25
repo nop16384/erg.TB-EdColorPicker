@@ -7,6 +7,14 @@ For Mozilla Thunderbird : Improved color selector for the mail composer window
 * Adds a CSS colors selector
 * Improved text color entry with a background color correctness indication
 
+## Install
+
+* Unpack your omni.ja, replace the files, repack omni.ja  
+Or  
+Replace your omni.ja directly.
+
+* For the first thunderbird restart use ```thunderbird -purgecaches``` since parts of thunderbird's UI is cached.
+
 ## Screenshots
 
 ### Dialog
