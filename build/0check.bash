@@ -20,8 +20,8 @@ fi
 Jar1="omni-${Version1}.ja.o"
 Jar2="omni-${Version2}.ja.o"
 
-DirJar1="tmp/DirJar1"
-DirJar2="tmp/DirJar2"
+DirJar1="tmp/${Version1}"
+DirJar2="tmp/${Version2}"
 
 F1="chrome/messenger/content/messenger/messengercompose/EdColorPicker.xhtml"
 F2="chrome/messenger/content/messenger/messengercompose/EdColorPicker.js"
@@ -44,7 +44,7 @@ fi
 echo "Checking ${Jar1} vs ${Jar2}"
 
 echo "  emptying tmp directory"
-  rm -rf "tmp/*"
+  rm -rf tmp/*
 
 echo "  creating tmp directories"
   mkdir -p "${DirJar1}"
